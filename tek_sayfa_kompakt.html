@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="titleDoc">IT Proje Görev Takip - Tek Sayfa A4 Kompakt Şablon</title>
+  <style>
+    @font-face {
+      font-family: 'Medeo Sans';
+      src: url('fonts/MedeoSansVariable.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Medeo Sans Display';
+      src: url('fonts/MedeoSansDisplay-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Medeo Mono';
+      src: url('fonts/MedeoMonoVariable.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --font-sans: 'Medeo Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Medeo Sans Display', 'Medeo Sans', sans-serif;
+      --font-mono: 'Medeo Mono', Consolas, monospace;
+      --c-black: #000;
+      --c-dark: #1a1a1a;
+      --c-gray-light: #eaeaea;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 8.2pt;
+      line-height: 1.25;
+      color: var(--c-dark);
+      background: #eef1f5;
+      padding: 16px 0;
+    }
+
+    .toolbar {
+      max-width: 210mm;
+      margin: 0 auto 10px auto;
+      background: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .lang-switcher {
+      display: flex;
+      background: #f1f5f9;
+      padding: 2px;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+    }
+    .lang-btn {
+      font-family: var(--font-mono);
+      font-size: 7.2pt;
+      font-weight: 700;
+      padding: 3px 6px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    .lang-btn.active {
+      background: #000;
+      color: #fff;
+    }
+    .btn-link {
+      font-size: 7.8pt;
+      font-weight: 600;
+      color: #334155;
+      text-decoration: none;
+      border: 1px solid #cbd5e1;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: #f8fafc;
+    }
+    .btn-link:hover { background: #e2e8f0; }
+
+    .btn-print {
+      font-family: var(--font-sans);
+      font-size: 8pt;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid #000;
+      background: #000;
+      color: #fff;
+    }
+
+    .a4-page {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto;
+      background: #fff;
+      padding: 7mm 9mm;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .header-box {
+      border-bottom: 2px solid #000;
+      padding-bottom: 4px;
+      margin-bottom: 5px;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .header-top h1 {
+      font-family: var(--font-display);
+      font-size: 12.5pt;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .tag-compact {
+      font-family: var(--font-mono);
+      font-size: 7pt;
+      font-weight: 700;
+      border: 1.5px solid #000;
+      padding: 2px 5px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 6px;
+      background: #f7f7f7;
+      padding: 3px 6px;
+      border: 1px solid #ddd;
+      font-size: 7.5pt;
+    }
+    .meta-lbl {
+      font-size: 6.2pt;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      display: block;
+    }
+    .meta-val {
+      font-weight: 600;
+      border-bottom: 1px dotted #888;
+      min-height: 14px;
+      outline: none;
+    }
+
+    .legend-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #000;
+      padding: 2.5px 6px;
+      margin: 4px 0 5px 0;
+      font-size: 6.8pt;
+    }
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 6.5pt;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+    .b-p0 { background: #000; color: #fff; }
+    .b-p1 { background: #ddd; color: #000; border: 1px solid #000; }
+    .b-p2 { background: #fff; color: #000; border: 1px solid #444; }
+    .b-p3 { background: #fff; color: #666; border: 1px dashed #777; }
+
+    .sec-title {
+      background: #000;
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 8.5pt;
+      font-weight: 700;
+      padding: 3px 7px;
+      margin-bottom: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .sec-title span.sub {
+      font-family: var(--font-mono);
+      font-size: 6.8pt;
+      font-weight: 400;
+      color: #ccc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      margin-bottom: 6px;
+      font-size: 7.6pt;
+    }
+    th, td {
+      border: 1px solid #222;
+      padding: 3px 4px;
+      vertical-align: middle;
+    }
+    th {
+      background: #ebebeb;
+      font-size: 6.8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: left;
+    }
+    tr:nth-child(even) td { background: #fafafa; }
+
+    .col-c { width: 18px; text-align: center; }
+    .col-id { width: 40px; text-align: center; font-family: var(--font-mono); font-size: 6.8pt; font-weight: 700; }
+    .col-pr { width: 32px; text-align: center; }
+    .col-mod { width: 85px; font-weight: 700; font-size: 7.2pt; }
+    .col-t { width: auto; }
+    .col-o { width: 65px; font-size: 7.2pt; }
+    .col-ef { width: 34px; text-align: center; font-family: var(--font-mono); font-size: 7.2pt; }
+    .col-st { width: 62px; text-align: center; font-size: 6.5pt; }
+
+    .cb {
+      width: 11px;
+      height: 11px;
+      border: 1.2px solid #000;
+      display: inline-block;
+      vertical-align: middle;
+      background: #fff;
+    }
+    .tt { font-weight: 600; display: block; font-size: 7.5pt; }
+    .tdesc { font-size: 6.5pt; color: #555; }
+    .dot { border-bottom: 1px dotted #888; width: 100%; height: 11px; display: inline-block; }
+
+    .bottom-strip {
+      border-top: 1.5px solid #000;
+      padding-top: 4px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 7px;
+    }
+    .box-block {
+      border: 1px solid #333;
+      padding: 3px 5px;
+      font-size: 6.8pt;
+    }
+    .box-h {
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 6.5pt;
+      margin-bottom: 2px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1px;
+    }
+    .line-d { border-bottom: 1px dotted #999; height: 10px; margin-top: 2px; }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 5.8pt;
+      color: #666;
+      margin-top: 3px;
+    }
+
+    @media print {
+      body { background: none; padding: 0; }
+      .toolbar { display: none !important; }
+      .a4-page {
+        width: 210mm !important;
+        height: 297mm !important;
+        padding: 6mm 8mm !important;
+        box-shadow: none !important;
+      }
+      @page { size: A4 portrait; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <strong id="barTitle">A4 IT Görev Matrisi (Kompakt)</strong>
+      
+      <!-- Backlink to monthly-project-planner-a4 -->
+      <a href="https://isihussain.github.io/monthly-project-planner-a4/" target="_blank" rel="noopener" class="btn-link" id="linkSister">
+        🗓️ Monthly Planner A4
+      </a>
+
+      <!-- 4 Language Switcher -->
+      <div class="lang-switcher">
+        <button class="lang-btn active" id="l-tr" onclick="setLang('tr')">TR</button>
+        <button class="lang-btn" id="l-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="l-ru" onclick="setLang('ru')">RU</button>
+        <button class="lang-btn" id="l-az" onclick="setLang('az')">AZ</button>
+      </div>
+    </div>
+    <div>
+      <button class="btn-print" onclick="window.print()" id="btnP">A4 Yazdır / PDF (Ctrl+P)</button>
+    </div>
+  </div>
+
+  <div class="a4-page">
+    <div>
+      <!-- Header -->
+      <div class="header-box">
+        <div class="header-top">
+          <h1 id="hTitle">IT PROJE GÖREV &amp; KRİTİKLİK TAKİP MATRİSİ</h1>
+          <span class="tag-compact" id="hTag">TEK SAYFA (A4 KOMPAKT)</span>
+        </div>
+        <div class="meta-row">
+          <div><span class="meta-lbl" id="mLbl1">Proje Adı:</span><div class="meta-val" contenteditable="true">CRM &amp; B2B Portal (PRJ-2026-X)</div></div>
+          <div><span class="meta-lbl" id="mLbl2">Sprint / Faz:</span><div class="meta-val" contenteditable="true">Sprint 04 (MVP)</div></div>
+          <div><span class="meta-lbl" id="mLbl3">Tarih:</span><div class="meta-val" contenteditable="true">07.11.2026</div></div>
+          <div><span class="meta-lbl" id="mLbl4">Canlı Hedefi:</span><div class="meta-val" contenteditable="true">25.11.2026</div></div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend-bar">
+        <strong id="legHeader">ÖNCELİK / KRİTİKLİK:</strong>
+        <span><span class="badge b-p0">P0</span> <b id="legP0">Blocker:</b> Canlıyı durdurur / Güvenlik</span>
+        <span><span class="badge b-p1">P1</span> <b id="legP1">Yüksek:</b> Ana fonksiyon / MVP</span>
+        <span><span class="badge b-p2">P2</span> <b id="legP2">Orta:</b> Filtre / Validasyon / Responsive</span>
+        <span><span class="badge b-p3">P3</span> <b id="legP3">Düşük:</b> Kozmetik / Ek özellik</span>
+      </div>
+
+      <!-- BÖLÜM 1: FRONTEND -->
+      <div class="sec-title">
+        <span id="feSecH">1. FRONTEND GÖREVLERİ (KULLANICI ARAYÜZÜ / İSTEMCİ)</span>
+        <span class="sub">UI, UX, CLIENT STATE, FORM VALIDATION</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="col-c">✓</th>
+            <th class="col-id">No</th>
+            <th class="col-pr">Prio</th>
+            <th class="col-mod" id="thMod1">Modül / Ekran</th>
+            <th class="col-t" id="thTask1">Görev &amp; İş Tanımı (Kabul Kriteri)</th>
+            <th class="col-o" id="thOwn1">Sorumlu</th>
+            <th class="col-ef" id="thEff1">Efor</th>
+            <th class="col-st" id="thSt1">Durum</th>
+          </tr>
+        </thead>
+        <tbody id="feBody">
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+
+      <!-- BÖLÜM 2: ADMIN & BACKEND -->
+      <div class="sec-title">
+        <span id="beSecH">2. ADMIN PANEL &amp; BACKEND GÖREVLERİ (YÖNETİM, API, DB)</span>
+        <span class="sub">DATABASE, RBAC, REST/GRAPHQL API, AUDIT LOG</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="col-c">✓</th>
+            <th class="col-id">No</th>
+            <th class="col-pr">Prio</th>
+            <th class="col-mod" id="thMod2">Modül / Katman</th>
+            <th class="col-t" id="thTask2">Görev &amp; İş Tanımı (Kabul Kriteri)</th>
+            <th class="col-o" id="thOwn2">Sorumlu</th>
+            <th class="col-ef" id="thEff2">Efor</th>
+            <th class="col-st" id="thSt2">Durum</th>
+          </tr>
+        </thead>
+        <tbody id="beBody">
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bottom Strip -->
+    <div>
+      <div class="bottom-strip">
+        <div class="box-block">
+          <div class="box-h" id="bH1">Kritik Notlar, Bağımlılıklar &amp; Riskler (Blockers)</div>
+          <div class="line-d" contenteditable="true"></div>
+          <div class="line-d" contenteditable="true"></div>
+        </div>
+        <div class="box-block">
+          <div class="box-h" id="bH2">QA / Test Kontrolleri</div>
+          <div id="qa1">[ ] API Entegrasyon Testi</div>
+          <div id="qa2">[ ] Yetki &amp; Güvenlik Testi</div>
+          <div id="qa3">[ ] Responsive &amp; UI Onayı</div>
+        </div>
+        <div class="box-block">
+          <div class="box-h" id="bH3">Proje Onay &amp; İmza</div>
+          <div style="margin-top: 10px; border-top: 1px solid #000; padding-top: 2px;">
+            <span id="signText">İmza: ____________________</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>IT PROJE GÖREV VE KRİTİKLİK ŞABLONU (A4 SİYAH-BEYAZ) &bull; MEDEO FONTS</span>
+        <a href="https://isihussain.github.io/monthly-project-planner-a4/" style="color:#666;text-decoration:none;">isihussain/monthly-project-planner-a4</a>
+        <span>SAYFA 1 / 1</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DICT = {
+      tr: {
+        title: "IT Proje Görev Takip - Tek Sayfa A4 Kompakt Şablon",
+        barTitle: "A4 IT Görev Matrisi (Kompakt)",
+        btnPrint: "A4 Yazdır / PDF (Ctrl+P)",
+        hTitle: "IT PROJE GÖREV & KRİTİKLİK TAKİP MATRİSİ",
+        hTag: "TEK SAYFA (A4 KOMPAKT)",
+        mLbl1: "Proje Adı:", mLbl2: "Sprint / Faz:", mLbl3: "Tarih:", mLbl4: "Canlı Hedefi:",
+        legHeader: "ÖNCELİK / KRİTİKLİK:",
+        legP0: "Blocker:", legP1: "Yüksek:", legP2: "Orta:", legP3: "Düşük:",
+        feSecH: "1. FRONTEND GÖREVLERİ (KULLANICI ARAYÜZÜ / İSTEMCİ)",
+        beSecH: "2. ADMIN PANEL & BACKEND GÖREVLERİ (YÖNETİM, API, DB)",
+        thMod: "Modül / Ekran", thModBe: "Modül / Katman", thTask: "Görev & İş Tanımı", thOwn: "Sorumlu", thEff: "Efor", thSt: "Durum",
+        bH1: "Kritik Notlar, Bağımlılıklar & Riskler (Blockers)",
+        bH2: "QA / Test Kontrolleri",
+        bH3: "Proje Onay & İmza",
+        qa1: "[ ] API Entegrasyon Testi", qa2: "[ ] Yetki & Güvenlik Testi", qa3: "[ ] Responsive & UI Onayı",
+        signText: "İmza: ____________________",
+        feRows: [
+          { id: 'FE-01', p: 'P0', m: 'Auth / Giriş', t: 'Kullanıcı Giriş & Kayıt Ekranları', d: 'Validasyon, JWT saklama, yetkisiz yönlendirme', o: 'Ahmet K.', e: '3g', s: '[ ] Sürüyor' },
+          { id: 'FE-02', p: 'P0', m: 'Korumalı Rota', t: 'Route Guard & Yetki Koruması', d: 'Giriş yapmamış kullanıcının sayfalara erişim engeli', o: 'Zeynep D.', e: '2g', s: '[ ] Yapılacak' },
+          { id: 'FE-03', p: 'P1', m: 'Dashboard', t: 'Ana Kontrol Paneli & Metrik Kartları', d: 'Veri özetleri, grafikler, skeleton yükleme', o: 'Ahmet K.', e: '4g', s: '[ ] Yapılacak' },
+          { id: 'FE-04', p: 'P1', m: 'Form & CRUD', t: 'Kayıt / Sipariş İşlem Formu (Stepper)', d: 'Çok adımlı veri girişi, hata mesajları, onay', o: 'Can B.', e: '3g', s: '[ ] Yapılacak' },
+          { id: 'FE-05', p: 'P2', m: 'Responsive', t: 'Mobil / Tablet Arayüz Uyumluluğu', d: '320px-768px taşma engeli, mobil menü', o: 'Can B.', e: '2g', s: '[ ] Yapılacak' },
+          { id: 'FE-06', p: '', m: '', t: '', d: '', o: '', e: '', s: '' }
+        ],
+        beRows: [
+          { id: 'BE-01', p: 'P0', m: 'DB & Schema', t: 'Veritabanı Tablo Şeması & Migrasyonlar', d: 'Users, Roles, Orders tabloları, foreign keys, index', o: 'Murat S.', e: '3g', s: '[✓] Bitti' },
+          { id: 'BE-02', p: 'P0', m: 'Admin RBAC', t: 'Admin Rol & İzin Yönetimi Middleware', d: 'SuperAdmin, Editör, Muhasebe yetki denetimi', o: 'Murat S.', e: '4g', s: '[ ] Sürüyor' },
+          { id: 'BE-03', p: 'P1', m: 'Admin CRUD', t: 'Kullanıcı & Kayıt Yönetimi API Endpoints', d: 'Sayfalama, arama, filtreleme, soft-delete', o: 'Elif T.', e: '3.5g', s: '[ ] Yapılacak' },
+          { id: 'BE-04', p: 'P1', m: 'Audit / Güvenlik', t: 'İşlem Günlüğü (Audit Log) & Rate Limit', d: 'Admin değişiklik geçmişi (JSON diff), DDoS koruması', o: 'Elif T.', e: '2.5g', s: '[ ] Yapılacak' },
+          { id: 'BE-05', p: 'P2', m: 'Arka Plan', t: 'Periyodik Raporlama & Yedekleme İşi', d: 'Gece çalışan otomatik veri yedekleme ve bildirim', o: 'DevOps', e: '2g', s: '[ ] Beklemede' },
+          { id: 'BE-06', p: '', m: '', t: '', d: '', o: '', e: '', s: '' }
+        ]
+      },
+      en: {
+        title: "IT Project Task Tracking - Single Page A4 Compact Template",
+        barTitle: "A4 IT Task Matrix (Compact)",
+        btnPrint: "Print A4 / PDF (Ctrl+P)",
+        hTitle: "IT PROJECT TASK & CRITICALITY MATRIX",
+        hTag: "SINGLE PAGE (A4 COMPACT)",
+        mLbl1: "Project Name:", mLbl2: "Sprint / Phase:", mLbl3: "Date:", mLbl4: "Target Date:",
+        legHeader: "PRIORITY / CRITICALITY:",
+        legP0: "Blocker:", legP1: "High:", legP2: "Medium:", legP3: "Low:",
+        feSecH: "1. FRONTEND TASKS (CLIENT UI & WORKFLOW)",
+        beSecH: "2. ADMIN & BACKEND TASKS (API, DB, ADMIN PANEL)",
+        thMod: "Module / Screen", thModBe: "Module / Layer", thTask: "Task & Description", thOwn: "Owner", thEff: "Effort", thSt: "Status",
+        bH1: "Critical Notes, Dependencies & Blockers",
+        bH2: "QA / Security Checks",
+        bH3: "Project Sign-off",
+        qa1: "[ ] API Integration Tests", qa2: "[ ] RBAC & Security Audit", qa3: "[ ] Responsive & UI QA",
+        signText: "Signature: ____________________",
+        feRows: [
+          { id: 'FE-01', p: 'P0', m: 'Auth & Login', t: 'User Login & Registration Screens', d: 'Form validation, secure token handling, 401 redirect', o: 'Alex K.', e: '3d', s: '[ ] In Progress' },
+          { id: 'FE-02', p: 'P0', m: 'Route Guard', t: 'Protected Routes & Auth Guard', d: 'Prevent unauthenticated users accessing dashboard', o: 'Sarah D.', e: '2d', s: '[ ] To Do' },
+          { id: 'FE-03', p: 'P1', m: 'Dashboard', t: 'Main Analytics Panel & Metric Cards', d: 'KPI widgets, activity feed, skeleton loading', o: 'Alex K.', e: '4d', s: '[ ] To Do' },
+          { id: 'FE-04', p: 'P1', m: 'Forms / CRUD', t: 'Multi-step Order Wizard (Stepper)', d: 'Step validation, item selector, address form', o: 'Brian M.', e: '3d', s: '[ ] To Do' },
+          { id: 'FE-05', p: 'P2', m: 'Mobile UI', t: 'Mobile & Tablet Responsive Tweaks', d: '320px-768px layout overflow fix, mobile drawer', o: 'Brian M.', e: '2d', s: '[ ] To Do' },
+          { id: 'FE-06', p: '', m: '', t: '', d: '', o: '', e: '', s: '' }
+        ],
+        beRows: [
+          { id: 'BE-01', p: 'P0', m: 'DB & Schema', t: 'Database Table Schema & Migrations', d: 'Users, Roles, Orders tables, foreign keys, indexes', o: 'Mark S.', e: '3d', s: '[✓] Done' },
+          { id: 'BE-02', p: 'P0', m: 'Admin RBAC', t: 'Admin Role & Permission Middleware', d: 'SuperAdmin, Editor, Accounting permissions matrix', o: 'Mark S.', e: '4d', s: '[ ] In Progress' },
+          { id: 'BE-03', p: 'P1', m: 'Admin CRUD', t: 'User Management REST API Endpoints', d: 'Pagination, multi-field search, soft-delete', o: 'Elena T.', e: '3.5d', s: '[ ] To Do' },
+          { id: 'BE-04', p: 'P1', m: 'Audit & Sec', t: 'Admin Audit Log & Rate Limiting', d: 'Audit change history (JSON diff), DDoS defense', o: 'Elena T.', e: '2.5d', s: '[ ] To Do' },
+          { id: 'BE-05', p: 'P2', m: 'Cron Tasks', t: 'Automated Backup & Archive Cron', d: 'Nightly database dump to S3 and log rotation', o: 'DevOps', e: '2d', s: '[ ] On Hold' },
+          { id: 'BE-06', p: '', m: '', t: '', d: '', o: '', e: '', s: '' }
+        ]
+      },
+      ru: {
+        title: "Матрица задач IT-проекта - Компактный шаблон А4",
+        barTitle: "А4 Матрица задач (Компакт)",
+        btnPrint: "Печать А4 / PDF (Ctrl+P)",
+        hTitle: "МАТРИЦА ЗАДАЧ И КРИТИЧНОСТИ IT-ПРОЕКТА",
+        hTag: "ОДНА СТРАНИЦА (А4 КОМПАКТ)",
+        mLbl1: "Проект:", mLbl2: "Спринт / Фаза:", mLbl3: "Дата:", mLbl4: "Релиз:",
+        legHeader: "ПРИОРИТЕТ / КРИТИЧНОСТЬ:",
+        legP0: "Блокер:", legP1: "Высокий:", legP2: "Средний:", legP3: "Низкий:",
+        feSecH: "1. ЗАДАЧИ FRONTEND (ИНТЕРФЕЙС И КЛИЕНТСКАЯ ЧАСТЬ)",
+        beSecH: "2. ЗАДАЧИ ADMIN & BACKEND (ПАНЕЛЬ, API, БД)",
+        thMod: "Модуль / Экран", thModBe: "Модуль / Слой", thTask: "Задача и описание", thOwn: "Ответственный", thEff: "Оценка", thSt: "Статус",
+        bH1: "Заметки, зависимости и блокеры",
+        bH2: "Контроль QA и безопасности",
+        bH3: "Согласование и подпись",
+        qa1: "[ ] Тестирование интеграции API", qa2: "[ ] Аудит прав доступа и безопасности", qa3: "[ ] Проверка адаптивности UI",
+        signText: "Подпись: ____________________",
+        feRows: [
+          { id: 'FE-01', p: 'P0', m: 'Вход / Auth', t: 'Формы входа и регистрации пользователей', d: 'Валидация, хранение JWT, редирект 401', o: 'Алексей К.', e: '3д', s: '[ ] В работе' },
+          { id: 'FE-02', p: 'P0', m: 'Роутинг', t: 'Защищенные маршруты и Route Guard', d: 'Защита закрытых разделов от неавторизованных', o: 'Дарья С.', e: '2д', s: '[ ] В плане' },
+          { id: 'FE-03', p: 'P1', m: 'Dashboard', t: 'Панель управления и виджеты метрик', d: 'KPI аналитика, список операций, скелетон', o: 'Алексей К.', e: '4д', s: '[ ] В плане' },
+          { id: 'FE-04', p: 'P1', m: 'Заказы / CRUD', t: 'Пошаговый мастер оформления (Stepper)', d: 'Валидация шагов, выбор товара, корзина', o: 'Иван Б.', e: '3д', s: '[ ] В плане' },
+          { id: 'FE-05', p: 'P2', m: 'Адаптив', t: 'Оптимизация для мобильных устройств', d: 'Устранение переполнения 320-768px, меню', o: 'Иван Б.', e: '2д', s: '[ ] В плане' },
+          { id: 'FE-06', p: '', m: '', t: '', d: '', o: '', e: '', s: '' }
+        ],
+        beRows: [
+          { id: 'BE-01', p: 'P0', m: 'БД / Схема', t: 'Схема БД и скрипты миграций', d: 'Таблицы Users, Roles, Orders, ключи, индексы', o: 'Михаил С.', e: '3д', s: '[✓] Готово' },
+          { id: 'BE-02', p: 'P0', m: 'Admin RBAC', t: 'Middleware ролей и прав администратора', d: 'Матрица прав SuperAdmin, Редактор, Бухгалтер', o: 'Михаил С.', e: '4д', s: '[ ] В работе' },
+          { id: 'BE-03', p: 'P1', m: 'Admin CRUD', t: 'API управления пользователями и записями', d: 'Пагинация, фильтрация, soft-delete', o: 'Елена Т.', e: '3.5д', s: '[ ] В плане' },
+          { id: 'BE-04', p: 'P1', m: 'Аудит / Безоп.', t: 'Журнал изменений (Audit Log) и Rate Limit', d: 'История действий в JSON, защита от DDoS', o: 'Елена Т.', e: '2.5д', s: '[ ] В плане' },
+          { id: 'BE-05', p: 'P2', m: 'Cron задачи', t: 'Резервное копирование и архивация', d: 'Авто-дамп БД в S3, очистка старых логов', o: 'DevOps', e: '2д', s: '[ ] Отложено' },
+          { id: 'BE-06', p: '', m: '', t: '', d: '', o: '', e: '', s: '' }
+        ]
+      },
+      az: {
+        title: "İT Layihə Tapşırıq İzləmə - Tək Səhifə A4 Kompakt Şablon",
+        barTitle: "A4 İT Tapşırıq Matrisi (Kompakt)",
+        btnPrint: "A4 Çap / PDF (Ctrl+P)",
+        hTitle: "İT LAYİHƏ TAPŞIRIQ VƏ KRİTİKLİK MATRİSİ",
+        hTag: "TƏK SƏHİFƏ (A4 KOMPAKT)",
+        mLbl1: "Layihə:", mLbl2: "Sprint / Mərhələ:", mLbl3: "Tarix:", mLbl4: "Hədəf:",
+        legHeader: "PRİORİTET / KRİTİKLİK:",
+        legP0: "Bloker:", legP1: "Yüksək:", legP2: "Orta:", legP3: "Aşağı:",
+        feSecH: "1. FRONTEND TAPŞIRIQLARI (KULLANICI ARAYÜZÜ / İSTEMCİ)",
+        beSecH: "2. ADMIN & BACKEND TAPŞIRIQLARI (İDARƏETMƏ, API, DB)",
+        thMod: "Modul / Ekran", thModBe: "Modul / Lay", thTask: "Tapşırıq və Təsvir", thOwn: "Məsul", thEff: "Zəhmət", thSt: "Status",
+        bH1: "Kritik Qeydlər, Asılılıqlar və Blokerlər",
+        bH2: "QA və Təhlükəsizlik Nəzarəti",
+        bH3: "Layihə Təsdiqi və İmza",
+        qa1: "[ ] API İnteqrasiya Testi", qa2: "[ ] Səlahiyyət və Təhlükəsizlik Auditi", qa3: "[ ] Responsive və UI Yoxlanışı",
+        signText: "İmza: ____________________",
+        feRows: [
+          { id: 'FE-01', p: 'P0', m: 'Auth / Giriş', t: 'İstifadəçi Giriş və Qeydiyyat Ekranları', d: 'Validasiya, JWT saxlanması, 401 yönləndirmə', o: 'Əhməd Q.', e: '3g', s: '[ ] Davam edir' },
+          { id: 'FE-02', p: 'P0', m: 'Marşrut Nəzarəti', t: 'Qorunan Marşrutlar və Route Guard', d: 'Giriş etməmiş istifadəçilərin panelə giriş qadağası', o: 'Zeynəb D.', e: '2g', s: '[ ] Görüləcək' },
+          { id: 'FE-03', p: 'P1', m: 'Dashboard', t: 'Əsas İdarə Paneli və Metrika Kartları', d: 'KPI göstəriciləri, son əməliyyatlar, skeleton', o: 'Əhməd Q.', e: '4g', s: '[ ] Görüləcək' },
+          { id: 'FE-04', p: 'P1', m: 'Formlar / CRUD', t: 'Addım-addım Sifariş Sihirbazı (Stepper)', d: 'Addım validasiyası, məhsul seçimi, ünvan', o: 'Cavid B.', e: '3g', s: '[ ] Görüləcək' },
+          { id: 'FE-05', p: 'P2', m: 'Mobil Uyğunluq', t: 'Mobil və Planşet Ekran Optimizasiyası', d: '320px-768px daşmaların qarşısı, mobil menyu', o: 'Cavid B.', e: '2g', s: '[ ] Görüləcək' },
+          { id: 'FE-06', p: '', m: '', t: '', d: '', o: '', e: '', s: '' }
+        ],
+        beRows: [
+          { id: 'BE-01', p: 'P0', m: 'DB & Sxem', t: 'Verilənlər Bazası Cədvəlləri və Miqrasiyalar', d: 'Users, Roles, Orders cədvəlləri, foreign keys', o: 'Murad S.', e: '3g', s: '[✓] Bitdi' },
+          { id: 'BE-02', p: 'P0', m: 'Admin RBAC', t: 'Admin Rol və İcazə İdarəetmə Middleware', d: 'SuperAdmin, Redaktor, Mühasib icazə matrisi', o: 'Murad S.', e: '4g', s: '[ ] Davam edir' },
+          { id: 'BE-03', p: 'P1', m: 'Admin CRUD', t: 'İstifadəçi İdarəetməsi REST API Servisləri', d: 'Səhifələmə, axtarış, filtrləmə, soft-delete', o: 'Elif T.', e: '3.5g', s: '[ ] Görüləcək' },
+          { id: 'BE-04', p: 'P1', m: 'Audit / Təhlük.', t: 'Əməliyyat Jurnalı (Audit Log) və Rate Limit', d: 'Admin dəyişiklik tarixi (JSON diff), DDoS müdafiəsi', o: 'Elif T.', e: '2.5g', s: '[ ] Görüləcək' },
+          { id: 'BE-05', p: 'P2', m: 'Cron İşləri', t: 'Periodik Yedəkləmə və Arxivləmə İşi', d: 'Gecə avtomatik DB nüsxəsinin S3-ə yüklənməsi', o: 'DevOps', e: '2g', s: '[ ] Gözləmədə' },
+          { id: 'BE-06', p: '', m: '', t: '', d: '', o: '', e: '', s: '' }
+        ]
+      }
+    };
+
+    let cur = 'tr';
+
+    function setLang(lang) {
+      if (!DICT[lang]) return;
+      cur = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('l-' + lang).classList.add('active');
+
+      const d = DICT[lang];
+      document.getElementById('titleDoc').innerText = d.title;
+      document.getElementById('barTitle').innerText = d.barTitle;
+      document.getElementById('btnP').innerText = d.btnPrint;
+      document.getElementById('hTitle').innerText = d.hTitle;
+      document.getElementById('hTag').innerText = d.hTag;
+      document.getElementById('mLbl1').innerText = d.mLbl1;
+      document.getElementById('mLbl2').innerText = d.mLbl2;
+      document.getElementById('mLbl3').innerText = d.mLbl3;
+      document.getElementById('mLbl4').innerText = d.mLbl4;
+      document.getElementById('legHeader').innerText = d.legHeader;
+      document.getElementById('legP0').innerText = d.legP0;
+      document.getElementById('legP1').innerText = d.legP1;
+      document.getElementById('legP2').innerText = d.legP2;
+      document.getElementById('legP3').innerText = d.legP3;
+      document.getElementById('feSecH').innerText = d.feSecH;
+      document.getElementById('beSecH').innerText = d.beSecH;
+      document.getElementById('thMod1').innerText = d.thMod;
+      document.getElementById('thMod2').innerText = d.thModBe;
+      document.getElementById('thTask1').innerText = d.thTask;
+      document.getElementById('thTask2').innerText = d.thTask;
+      document.getElementById('thOwn1').innerText = d.thOwn;
+      document.getElementById('thOwn2').innerText = d.thOwn;
+      document.getElementById('thEff1').innerText = d.thEff;
+      document.getElementById('thEff2').innerText = d.thEff;
+      document.getElementById('thSt1').innerText = d.thSt;
+      document.getElementById('thSt2').innerText = d.thSt;
+      document.getElementById('bH1').innerText = d.bH1;
+      document.getElementById('bH2').innerText = d.bH2;
+      document.getElementById('bH3').innerText = d.bH3;
+      document.getElementById('qa1').innerText = d.qa1;
+      document.getElementById('qa2').innerText = d.qa2;
+      document.getElementById('qa3').innerText = d.qa3;
+      document.getElementById('signText').innerText = d.signText;
+
+      renderRows('feBody', d.feRows);
+      renderRows('beBody', d.beRows);
+    }
+
+    function renderRows(id, rows) {
+      const tb = document.getElementById(id);
+      tb.innerHTML = '';
+      rows.forEach(r => {
+        const tr = document.createElement('tr');
+        if (!r.t && !r.m) {
+          tr.innerHTML = `
+            <td class="col-c"><span class="cb"></span></td>
+            <td class="col-id">${r.id}</td>
+            <td class="col-pr"><span class="dot"></span></td>
+            <td><span class="dot"></span></td>
+            <td><span class="dot"></span></td>
+            <td><span class="dot"></span></td>
+            <td class="col-ef"><span class="dot"></span></td>
+            <td class="col-st"><span class="dot"></span></td>
+          `;
+        } else {
+          const bClass = r.p === 'P0' ? 'b-p0' : r.p === 'P1' ? 'b-p1' : r.p === 'P2' ? 'b-p2' : 'b-p3';
+          tr.innerHTML = `
+            <td class="col-c"><span class="cb"></span></td>
+            <td class="col-id">${r.id}</td>
+            <td class="col-pr"><span class="badge ${bClass}">${r.p}</span></td>
+            <td><b>${r.m}</b></td>
+            <td><span class="tt">${r.t}</span><span class="tdesc">${r.d}</span></td>
+            <td>${r.o}</td>
+            <td class="col-ef">${r.e}</td>
+            <td class="col-st">${r.s}</td>
+          `;
+        }
+        tb.appendChild(tr);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setLang('tr');
+    });
+  </script>
+</body>
+</html>
