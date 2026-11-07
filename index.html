@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageBrowserTitle">IT Proje Görev ve Kritiklik Seviyesi Şablonu | A4 Siyah-Beyaz Baskı</title>
+  
+  <!-- Medeo Typography Tokens -->
+  <style>
+    @font-face {
+      font-family: 'Medeo Sans';
+      src: url('fonts/MedeoSansVariable.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Medeo Sans';
+      src: url('fonts/MedeoSansVariable-Italic.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Medeo Sans Display';
+      src: url('fonts/MedeoSansDisplay-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Medeo Mono';
+      src: url('fonts/MedeoMonoVariable.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --font-sans: 'Medeo Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-display: 'Medeo Sans Display', 'Medeo Sans', -apple-system, sans-serif;
+      --font-mono: 'Medeo Mono', Consolas, 'SF Mono', Monaco, monospace;
+
+      --c-black: #000000;
+      --c-dark: #1f2937;
+      --c-gray-900: #111827;
+      --c-gray-700: #374151;
+      --c-gray-500: #6b7280;
+      --c-gray-300: #d1d5db;
+      --c-gray-200: #e5e7eb;
+      --c-gray-100: #f3f4f6;
+      --c-white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 8.8pt;
+      line-height: 1.35;
+      color: var(--c-dark);
+      background: #e2e8f0;
+      padding: 20px 0 60px 0;
+    }
+
+    /* =========================================================
+       EKRAN KONTROL PANELİ (TOOLBAR)
+       ========================================================= */
+    .app-toolbar {
+      max-width: 210mm;
+      margin: 0 auto 16px auto;
+      background: var(--c-white);
+      padding: 14px 18px;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      border: 1px solid var(--c-gray-200);
+    }
+
+    .toolbar-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--c-gray-200);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .toolbar-title h1 {
+      font-family: var(--font-display);
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--c-gray-900);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-title p {
+      font-size: 8pt;
+      color: var(--c-gray-500);
+      margin-top: 2px;
+    }
+
+    /* Dil ve Harici Linkler Barı */
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-switcher {
+      display: flex;
+      background: var(--c-gray-100);
+      padding: 2px;
+      border-radius: 5px;
+      border: 1px solid var(--c-gray-300);
+    }
+
+    .lang-btn {
+      font-family: var(--font-mono);
+      font-size: 7.5pt;
+      font-weight: 700;
+      padding: 4px 8px;
+      border: none;
+      background: transparent;
+      color: var(--c-gray-700);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--c-black);
+      color: var(--c-white);
+    }
+
+    /* Harici Proje Backlink Butonu */
+    .btn-backlink {
+      font-family: var(--font-sans);
+      font-size: 8pt;
+      font-weight: 600;
+      padding: 5px 10px;
+      background: #f8fafc;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+    }
+    .btn-backlink:hover {
+      background: #e2e8f0;
+      border-color: #94a3b8;
+    }
+
+    .toolbar-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .view-selector {
+      display: flex;
+      gap: 4px;
+      background: var(--c-gray-100);
+      padding: 3px;
+      border-radius: 6px;
+    }
+
+    .view-btn {
+      font-family: var(--font-sans);
+      font-size: 7.8pt;
+      font-weight: 600;
+      padding: 5px 10px;
+      border: none;
+      background: none;
+      color: var(--c-gray-700);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .view-btn.active {
+      background: var(--c-white);
+      color: var(--c-black);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-weight: 700;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--font-sans);
+      font-size: 8pt;
+      font-weight: 600;
+      padding: 6px 11px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--c-black);
+      color: var(--c-white);
+      border-color: var(--c-black);
+    }
+    .btn-primary:hover {
+      background: #2b2b2b;
+    }
+
+    .btn-secondary {
+      background: var(--c-white);
+      color: var(--c-gray-700);
+      border-color: var(--c-gray-300);
+    }
+    .btn-secondary:hover {
+      background: var(--c-gray-100);
+      color: var(--c-black);
+    }
+
+    .btn-danger {
+      background: var(--c-white);
+      color: #b91c1c;
+      border-color: #fca5a5;
+    }
+    .btn-danger:hover {
+      background: #fef2f2;
+    }
+
+    .toolbar-hint {
+      font-size: 7.5pt;
+      color: var(--c-gray-500);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    /* =========================================================
+       A4 SAYFA DÜZENİ
+       ========================================================= */
+    .a4-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .a4-page {
+      width: 210mm;
+      height: 297mm;
+      background: var(--c-white);
+      padding: 9mm 11mm;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .doc-header {
+      border-bottom: 2px solid var(--c-black);
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+    }
+
+    .header-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 5px;
+    }
+
+    .title-group h2 {
+      font-family: var(--font-display);
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--c-black);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 7.8pt;
+      font-weight: 700;
+      color: var(--c-gray-700);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .page-indicator {
+      font-family: var(--font-mono);
+      font-size: 7.2pt;
+      font-weight: 800;
+      border: 1.5px solid var(--c-black);
+      padding: 2px 7px;
+      text-transform: uppercase;
+      background: var(--c-white);
+    }
+
+    /* Meta Grid */
+    .meta-box {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1.2fr 1.1fr;
+      gap: 7px;
+      background: #f8fafc;
+      padding: 5px 7px;
+      border: 1px solid var(--c-gray-300);
+      font-size: 7.8pt;
+    }
+
+    .meta-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-label {
+      font-size: 6.5pt;
+      font-weight: 700;
+      color: var(--c-gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .meta-input {
+      font-weight: 600;
+      color: var(--c-black);
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 7.8pt;
+      border-bottom: 1px dotted var(--c-gray-500);
+      padding: 1px 0;
+      outline: none;
+      width: 100%;
+    }
+
+    .meta-input:focus {
+      border-bottom: 1px solid var(--c-black);
+      background: #ffffff;
+    }
+
+    /* Kritiklik Seviyeleri Göstergesi */
+    .legend-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1.2px solid var(--c-black);
+      padding: 3.5px 7px;
+      margin: 5px 0 7px 0;
+      font-size: 7pt;
+      background: var(--c-white);
+    }
+
+    .legend-title {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-right: 6px;
+    }
+
+    .legend-items {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Rozetler */
+    .prio-badge {
+      font-family: var(--font-mono);
+      font-size: 6.8pt;
+      font-weight: 800;
+      padding: 1px 4px;
+      border-radius: 2px;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .prio-p0 { background: var(--c-black); color: var(--c-white); border: 1px solid var(--c-black); }
+    .prio-p1 { background: #e2e8f0; color: var(--c-black); border: 1.2px solid var(--c-black); }
+    .prio-p2 { background: var(--c-white); color: var(--c-dark); border: 1px solid var(--c-gray-700); }
+    .prio-p3 { background: var(--c-white); color: var(--c-gray-500); border: 1px dashed var(--c-gray-500); }
+
+    /* Kategori Başlığı */
+    .section-header {
+      background: var(--c-black);
+      color: var(--c-white);
+      padding: 4px 7px;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 5px solid var(--c-gray-700);
+    }
+
+    .section-header h3 {
+      font-family: var(--font-display);
+      font-size: 9.2pt;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .section-header span.sub {
+      font-family: var(--font-mono);
+      font-size: 7.2pt;
+      color: var(--c-gray-300);
+    }
+
+    /* Görev Tablosu */
+    .task-table-wrapper {
+      position: relative;
+    }
+
+    .task-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 7.8pt;
+    }
+
+    .task-table th,
+    .task-table td {
+      border: 1px solid #222;
+      padding: 3.5px 4.5px;
+      vertical-align: middle;
+    }
+
+    .task-table th {
+      background: #f1f5f9;
+      font-size: 6.8pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      text-align: left;
+      color: var(--c-black);
+    }
+
+    .task-table tr:nth-child(even) td {
+      background: #fdfdfd;
+    }
+
+    /* Kolon Genişlikleri */
+    .col-chk { width: 22px; text-align: center; }
+    .col-id { width: 44px; text-align: center; }
+    .col-pr { width: 36px; text-align: center; }
+    .col-mod { width: 95px; }
+    .col-task { width: auto; }
+    .col-own { width: 75px; }
+    .col-eff { width: 38px; text-align: center; }
+    .col-st { width: 68px; text-align: center; }
+    .col-act { width: 20px; text-align: center; }
+
+    .custom-check {
+      width: 12px;
+      height: 12px;
+      border: 1.4px solid var(--c-black);
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      background: var(--c-white);
+      position: relative;
+    }
+
+    .custom-check.checked::after {
+      content: '✓';
+      position: absolute;
+      top: -4px;
+      left: 1px;
+      font-size: 10pt;
+      font-weight: 900;
+      color: var(--c-black);
+    }
+
+    .task-id {
+      font-family: var(--font-mono);
+      font-size: 7.2pt;
+      font-weight: 700;
+      color: var(--c-dark);
+    }
+
+    .cell-editable {
+      outline: none;
+      min-height: 13px;
+      word-break: break-word;
+    }
+
+    .cell-editable:focus {
+      background: #fffbeb;
+      box-shadow: inset 0 0 0 1px #f59e0b;
+      border-radius: 2px;
+    }
+
+    .task-name {
+      font-weight: 700;
+      color: var(--c-black);
+      line-height: 1.2;
+      display: block;
+      font-size: 7.8pt;
+    }
+
+    .task-sub {
+      font-size: 6.8pt;
+      color: var(--c-gray-700);
+      line-height: 1.15;
+      margin-top: 1px;
+      display: block;
+    }
+
+    .module-badge { font-weight: 700; font-size: 7.2pt; line-height: 1.2; }
+    .owner-badge { font-size: 7.2pt; font-weight: 600; }
+    .effort-num { font-family: var(--font-mono); font-size: 7.2pt; font-weight: 700; }
+
+    .status-text {
+      font-size: 6.8pt;
+      font-weight: 600;
+      border: 1px solid var(--c-gray-500);
+      padding: 1px 3px;
+      border-radius: 2px;
+      display: inline-block;
+      background: var(--c-white);
+      white-space: nowrap;
+    }
+
+    .row-delete-btn {
+      color: #991b1b;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 9pt;
+      opacity: 0.25;
+      transition: opacity 0.15s;
+    }
+    .task-table tr:hover .row-delete-btn { opacity: 1; }
+
+    .table-add-row {
+      margin-top: 3px;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-add {
+      font-family: var(--font-sans);
+      font-size: 7.2pt;
+      font-weight: 600;
+      background: var(--c-white);
+      border: 1px dashed var(--c-gray-500);
+      padding: 2px 7px;
+      border-radius: 3px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .btn-add:hover { background: var(--c-gray-100); border-color: var(--c-black); }
+
+    /* Alt Alan (Notes, QA & İmzalar) */
+    .footer-section {
+      margin-top: auto;
+      border-top: 1.5px solid var(--c-black);
+      padding-top: 5px;
+    }
+
+    .notes-qa-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 9px;
+      margin-bottom: 5px;
+    }
+
+    .info-card {
+      border: 1px solid var(--c-black);
+      padding: 4px 7px;
+      background: var(--c-white);
+    }
+
+    .card-title {
+      font-size: 7pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--c-black);
+      border-bottom: 1px solid var(--c-gray-300);
+      padding-bottom: 2px;
+    }
+
+    .card-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 3px;
+    }
+
+    .dotted-row {
+      border-bottom: 1px dotted var(--c-gray-500);
+      min-height: 12px;
+      outline: none;
+      font-size: 7.2pt;
+    }
+
+    .check-list-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 7pt;
+      margin-top: 2px;
+    }
+
+    .check-list-items li {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* İmza Kutuları */
+    .signatures-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 9px;
+      margin-top: 3px;
+    }
+
+    .sign-card {
+      border: 1px solid var(--c-gray-700);
+      padding: 3px 5px;
+      font-size: 7pt;
+    }
+
+    .sign-role {
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 6.5pt;
+      color: var(--c-gray-700);
+      margin-bottom: 12px;
+    }
+
+    .sign-meta {
+      border-top: 1px solid var(--c-black);
+      display: flex;
+      justify-content: space-between;
+      font-size: 6.5pt;
+      padding-top: 2px;
+      font-family: inherit;
+    }
+
+    .bottom-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 6.2pt;
+      color: var(--c-gray-500);
+      margin-top: 4px;
+    }
+
+    /* =========================================================
+       PRINT STYLES (@media print)
+       ========================================================= */
+    @media print {
+      html, body {
+        background: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm !important;
+      }
+
+      .no-print,
+      .col-act,
+      .row-delete-btn,
+      .table-add-row,
+      .app-toolbar {
+        display: none !important;
+      }
+
+      .a4-container {
+        gap: 0 !important;
+      }
+
+      .a4-page {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        padding: 8mm 10mm !important;
+        box-shadow: none !important;
+        border: none !important;
+        page-break-inside: avoid !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+
+      .a4-page:last-child {
+        page-break-after: auto !important;
+        break-after: auto !important;
+      }
+
+      body.show-fe-only #pageBackend {
+        display: none !important;
+      }
+      body.show-be-only #pageFrontend {
+        display: none !important;
+      }
+
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- EKRAN KONTROL PANELİ (TOOLBAR) -->
+  <div class="app-toolbar no-print">
+    <!-- Üst Satır: Başlık, Dil Seçici ve Kardeş Proje Backlink -->
+    <div class="toolbar-top-row">
+      <div class="toolbar-title">
+        <h1>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span id="uiAppTitle">IT Proje Görev &amp; Kritiklik Seviyesi Şablonu</span>
+        </h1>
+        <p id="uiAppSubtitle">A4 Siyah-Beyaz Baskı ve Çıktı İçin Optimize Edilmiştir &bull; Medeo Typography</p>
+      </div>
+
+      <div class="nav-controls">
+        <!-- KARDEŞ PROJE BACKLİNKİ (Monthly Project Planner A4) -->
+        <a href="https://isihussain.github.io/monthly-project-planner-a4/" target="_blank" rel="noopener" class="btn-backlink" id="linkMonthlyPlanner" title="Monthly Project Planner A4">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span id="uiBacklinkText">🗓️ A4 Takvim / Aylık Planlayıcı</span>
+        </a>
+
+        <!-- 4 DİL SEÇİCİ -->
+        <div class="lang-switcher" aria-label="Language Selector">
+          <button class="lang-btn active" id="lang-tr" onclick="changeLanguage('tr')">TR</button>
+          <button class="lang-btn" id="lang-en" onclick="changeLanguage('en')">EN</button>
+          <button class="lang-btn" id="lang-ru" onclick="changeLanguage('ru')">RU</button>
+          <button class="lang-btn" id="lang-az" onclick="changeLanguage('az')">AZ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alt Satır: Görünümler ve Eylemler -->
+    <div class="toolbar-bottom-row">
+      <div class="view-selector">
+        <button class="view-btn active" onclick="switchView('all', this)" id="btnViewAll">Tümü (2 Sayfa Önlü-Arkalı)</button>
+        <button class="view-btn" onclick="switchView('fe', this)" id="btnViewFE">Sadece Frontend (Sayfa 1)</button>
+        <button class="view-btn" onclick="switchView('be', this)" id="btnViewBE">Sadece Admin &amp; Backend (Sayfa 2)</button>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-secondary" onclick="toggleBlankMode()" id="btnBlank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+          <span id="uiBtnBlank">Boş / Örnek Veri Değiştir</span>
+        </button>
+        <button class="btn btn-secondary" onclick="exportDataJSON()" id="btnExport">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span id="uiBtnExport">JSON Dışa Aktar</span>
+        </button>
+        <button class="btn btn-secondary" onclick="triggerImportJSON()" id="btnImport">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <span id="uiBtnImport">JSON İçe Aktar</span>
+        </button>
+        <input type="file" id="jsonFileInput" accept=".json" style="display:none" onchange="importDataJSON(event)" />
+        <button class="btn btn-danger" onclick="resetAllDefaults()" id="btnReset">
+          <span id="uiBtnReset">Sıfırla</span>
+        </button>
+        <button class="btn btn-primary" onclick="window.print()" id="btnPrint">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          <span id="uiBtnPrint">A4 Yazdır / PDF Kaydet (Ctrl+P)</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="toolbar-hint">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      <span id="uiToolbarHint">İpucu: Sayfadaki tüm alanları doğrudan düzenleyebilirsiniz. Rozetlere (P0, P1...) tıklayarak önceliği değiştirin. Değişiklikler otomatik kaydedilir.</span>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- A4 SAYFALARI                                                            -->
+  <!-- ========================================================================= -->
+  <div class="a4-container">
+
+    <!-- ======================================================================= -->
+    <!-- SAYFA 1: FRONTEND                                                       -->
+    <!-- ======================================================================= -->
+    <div class="a4-page" id="pageFrontend">
+      <div>
+        <div class="doc-header">
+          <div class="header-top-row">
+            <div class="title-group">
+              <h2 id="docTitleFE">IT PROJE GÖREV &amp; KRİTİKLİK TAKİP LİSTESİ</h2>
+              <div class="subtitle" id="docSubFE">FRONTEND (İSTEMCİ &amp; KULLANICI ARAYÜZÜ) İŞ LİSTESİ</div>
+            </div>
+            <div class="page-indicator" id="pageIndicatorFE">SAYFA 1 / 2 &bull; FRONTEND</div>
+          </div>
+
+          <div class="meta-box">
+            <div class="meta-field">
+              <span class="meta-label" id="lblFeProj">Proje Adı &amp; Kodu</span>
+              <input type="text" class="meta-input store-state" id="m_fe_proj" value="CRM &amp; B2B Portal (PRJ-2026-X)">
+            </div>
+            <div class="meta-field">
+              <span class="meta-label" id="lblFeSprint">Sprint / Faz</span>
+              <input type="text" class="meta-input store-state" id="m_fe_sprint" value="Sprint 04 (MVP)">
+            </div>
+            <div class="meta-field">
+              <span class="meta-label" id="lblFeDate">Tarih / Versiyon</span>
+              <input type="text" class="meta-input store-state" id="m_fe_date" value="07.11.2026 / v1.0.0">
+            </div>
+            <div class="meta-field">
+              <span class="meta-label" id="lblFeRelease">Hedef Canlı Tarihi</span>
+              <input type="text" class="meta-input store-state" id="m_fe_release" value="25.11.2026">
+            </div>
+          </div>
+        </div>
+
+        <!-- Kritiklik Göstergesi -->
+        <div class="legend-strip">
+          <span class="legend-title" id="legendTitleFE">KRİTİKLİK MATRİSİ:</span>
+          <div class="legend-items">
+            <div class="legend-item"><span class="prio-badge prio-p0">P0</span> <span id="legP0FE"><b>Blocker:</b> Canlıyı durduran / Güvenlik</span></div>
+            <div class="legend-item"><span class="prio-badge prio-p1">P1</span> <span id="legP1FE"><b>Yüksek:</b> MVP çekirdek akışlar</span></div>
+            <div class="legend-item"><span class="prio-badge prio-p2">P2</span> <span id="legP2FE"><b>Orta:</b> Validasyon / Mobil / Filtre</span></div>
+            <div class="legend-item"><span class="prio-badge prio-p3">P3</span> <span id="legP3FE"><b>Düşük:</b> Kozmetik / Ek özellikler</span></div>
+          </div>
+        </div>
+
+        <!-- Bölüm Başlığı -->
+        <div class="section-header">
+          <h3><span id="secTitleFE">&boxv; 1. BÖLÜM: FRONTEND GELİŞTİRME GÖREVLERİ</span></h3>
+          <span class="sub" id="secSubFE">UI, UX, CLIENT-SIDE STATE, API CONSUMPTION</span>
+        </div>
+
+        <!-- Frontend Tablosu -->
+        <div class="task-table-wrapper">
+          <table class="task-table" id="frontendTable">
+            <thead>
+              <tr>
+                <th class="col-chk" id="thChkFE">Dur</th>
+                <th class="col-id" id="thIdFE">No</th>
+                <th class="col-pr" id="thPrFE">Prio</th>
+                <th class="col-mod" id="thModFE">Modül / Ekran</th>
+                <th class="col-task" id="thTaskFE">Görev &amp; İş Tanımı (Kabul Kriteri / Kapsam)</th>
+                <th class="col-own" id="thOwnFE">Sorumlu</th>
+                <th class="col-eff" id="thEffFE">Efor</th>
+                <th class="col-st" id="thStFE">Durum</th>
+                <th class="col-act no-print"></th>
+              </tr>
+            </thead>
+            <tbody id="feTableBody"></tbody>
+          </table>
+
+          <div class="table-add-row no-print">
+            <button class="btn-add" onclick="addNewRow('fe')">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span id="uiAddRowFE">Frontend Görevi Ekle</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alt Notlar & QA & İmzalar -->
+      <div class="footer-section">
+        <div class="notes-qa-grid">
+          <div class="info-card">
+            <div class="card-title">
+              <span id="titleFeNotes">Frontend Notları, API Bağımlılıkları &amp; Engeller (Blockers)</span>
+              <span>KRİTİK</span>
+            </div>
+            <div class="card-lines">
+              <div class="dotted-row cell-editable store-state" id="fe_note_1" contenteditable="true"></div>
+              <div class="dotted-row cell-editable store-state" id="fe_note_2" contenteditable="true"></div>
+              <div class="dotted-row cell-editable store-state" id="fe_note_3" contenteditable="true"></div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="card-title" id="titleFeQA">Frontend QA Kontrol Listesi</div>
+            <ul class="check-list-items">
+              <li><span class="custom-check" onclick="toggleCheck(this)"></span> <span id="qaFE1">Cross-Browser (Chrome, Safari, Firefox, Edge)</span></li>
+              <li><span class="custom-check" onclick="toggleCheck(this)"></span> <span id="qaFE2">Mobil / Tablet Responsive Uyumluluk</span></li>
+              <li><span class="custom-check" onclick="toggleCheck(this)"></span> <span id="qaFE3">Konsol Hata &amp; Warning Sıfırlaması</span></li>
+              <li><span class="custom-check" onclick="toggleCheck(this)"></span> <span id="qaFE4">Boş Durumlar (Empty States) &amp; Skeleton</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="signatures-row">
+          <div class="sign-card">
+            <div class="sign-role" id="roleFeLead">Frontend Lead / Sorumlu</div>
+            <div class="sign-meta"><span id="lblFeSign1">İsim &bull; İmza:</span><span id="lblFeDate1">Tarih: ___ / ___</span></div>
+          </div>
+          <div class="sign-card">
+            <div class="sign-role" id="roleUIDesign">UI / UX Tasarım Onayı</div>
+            <div class="sign-meta"><span id="lblFeSign2">İsim &bull; İmza:</span><span id="lblFeDate2">Tarih: ___ / ___</span></div>
+          </div>
+          <div class="sign-card">
+            <div class="sign-role" id="roleFePM">Proje Yöneticisi / Tech Lead</div>
+            <div class="sign-meta"><span id="lblFeSign3">İsim &bull; İmza:</span><span id="lblFeDate3">Tarih: ___ / ___</span></div>
+          </div>
+        </div>
+
+        <div class="bottom-meta-bar">
+          <span id="footerBrandFE">IT PROJE GÖREV VE KRİTİKLİK ŞABLONU (A4 SİYAH-BEYAZ)</span>
+          <span>FONTLAR: MEDEO SANS / MEDEO MONO &bull; MIT LICENSE</span>
+          <span id="footerPageFE">SAYFA 1 / 2</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ======================================================================= -->
+    <!-- SAYFA 2: ADMIN & BACKEND                                                -->
+    <!-- ======================================================================= -->
+    <div class="a4-page" id="pageBackend">
+      <div>
+        <div class="doc-header">
+          <div class="header-top-row">
+            <div class="title-group">
+              <h2 id="docTitleBE">IT PROJE GÖREV &amp; KRİTİKLİK TAKİP LİSTESİ</h2>
+              <div class="subtitle" id="docSubBE">ADMIN &amp; BACKEND (YÖNETİM PANELİ, API, VERİTABANI &amp; SERVİSLER)</div>
+            </div>
+            <div class="page-indicator" id="pageIndicatorBE">SAYFA 2 / 2 &bull; ADMIN &amp; BACKEND</div>
+          </div>
+
+          <div class="meta-box">
+            <div class="meta-field">
+              <span class="meta-label" id="lblBeProj">Proje Adı &amp; Kodu</span>
+              <input type="text" class="meta-input store-state" id="m_be_proj" value="CRM &amp; B2B Portal (PRJ-2026-X)">
+            </div>
+            <div class="meta-field">
+              <span class="meta-label" id="lblBeArch">Backend Mimarisi</span>
+              <input type="text" class="meta-input store-state" id="m_be_arch" value="Node.js / PostgreSQL / REST API">
+            </div>
+            <div class="meta-field">
+              <span class="meta-label" id="lblBeEnv">Ortam (Environment)</span>
+              <input type="text" class="meta-input store-state" id="m_be_env" value="Staging / Production">
+            </div>
+            <div class="meta-field">
+              <span class="meta-label" id="lblBeRelease">Hedef Canlı Tarihi</span>
+              <input type="text" class="meta-input store-state" id="m_be_release" value="25.11.2026">
+            </div>
+          </div>
+        </div>
+
+        <!-- Kritiklik Göstergesi -->
+        <div class="legend-strip">
+          <span class="legend-title" id="legendTitleBE">KRİTİKLİK MATRİSİ:</span>
+          <div class="legend-items">
+            <div class="legend-item"><span class="prio-badge prio-p0">P0</span> <span id="legP0BE"><b>Blocker:</b> Veri kaybı / Auth açığı / DB kilidi</span></div>
+            <div class="legend-item"><span class="prio-badge prio-p1">P1</span> <span id="legP1BE"><b>Yüksek:</b> Çekirdek CRUD / RBAC yetkileri</span></div>
+            <div class="legend-item"><span class="prio-badge prio-p2">P2</span> <span id="legP2BE"><b>Orta:</b> Loglama / Dış servisler / Rapor</span></div>
+            <div class="legend-item"><span class="prio-badge prio-p3">P3</span> <span id="legP3BE"><b>Düşük:</b> Cron optimizasyon / Arşiv</span></div>
+          </div>
+        </div>
+
+        <!-- Bölüm Başlığı -->
+        <div class="section-header">
+          <h3><span id="secTitleBE">&boxv; 2. BÖLÜM: ADMIN PANEL &amp; BACKEND GELİŞTİRME GÖREVLERİ</span></h3>
+          <span class="sub" id="secSubBE">DATABASE, RBAC YETKİLERİ, CRUD API, AUDIT LOG, SERVİSLER</span>
+        </div>
+
+        <!-- Backend Tablosu -->
+        <div class="task-table-wrapper">
+          <table class="task-table" id="backendTable">
+            <thead>
+              <tr>
+                <th class="col-chk" id="thChkBE">Dur</th>
+                <th class="col-id" id="thIdBE">No</th>
+                <th class="col-pr" id="thPrBE">Prio</th>
+                <th class="col-mod" id="thModBE">Modül / Katman</th>
+                <th class="col-task" id="thTaskBE">Görev &amp; İş Tanımı (Kabul Kriteri / Kapsam)</th>
+                <th class="col-own" id="thOwnBE">Sorumlu</th>
+                <th class="col-eff" id="thEffBE">Efor</th>
+                <th class="col-st" id="thStBE">Durum</th>
+                <th class="col-act no-print"></th>
+              </tr>
+            </thead>
+            <tbody id="beTableBody"></tbody>
+          </table>
+
+          <div class="table-add-row no-print">
+            <button class="btn-add" onclick="addNewRow('be')">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span id="uiAddRowBE">Backend Görevi Ekle</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alt Notlar & Güvenlik & İmzalar -->
+      <div class="footer-section">
+        <div class="notes-qa-grid">
+          <div class="info-card">
+            <div class="card-title">
+              <span id="titleBeNotes">Admin / Backend Notları, Güvenlik Kriterleri &amp; Entegrasyonlar</span>
+              <span>KRİTİK</span>
+            </div>
+            <div class="card-lines">
+              <div class="dotted-row cell-editable store-state" id="be_note_1" contenteditable="true"></div>
+              <div class="dotted-row cell-editable store-state" id="be_note_2" contenteditable="true"></div>
+              <div class="dotted-row cell-editable store-state" id="be_note_3" contenteditable="true"></div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="card-title" id="titleBeSec">Backend &amp; DevOps Güvenlik Kontrolü</div>
+            <ul class="check-list-items">
+              <li><span class="custom-check" onclick="toggleCheck(this)"></span> <span id="secBE1">SQL Enjeksiyonu &amp; Parametrik Sorgu Testi</span></li>
+              <li><span class="custom-check" onclick="toggleCheck(this)"></span> <span id="secBE2">Rate Limiting &amp; CORS Güvenlik Ayarları</span></li>
+              <li><span class="custom-check" onclick="toggleCheck(this)"></span> <span id="secBE3">.env Gizli Anahtar ve Kimlik Kontrolleri</span></li>
+              <li><span class="custom-check" onclick="toggleCheck(this)"></span> <span id="secBE4">DB Yedekleme &amp; Rollback Senaryosu Hazır</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="signatures-row">
+          <div class="sign-card">
+            <div class="sign-role" id="roleBeLead">Backend Lead / Mimar</div>
+            <div class="sign-meta"><span id="lblBeSign1">İsim &bull; İmza:</span><span id="lblBeDate1">Tarih: ___ / ___</span></div>
+          </div>
+          <div class="sign-card">
+            <div class="sign-role" id="roleBeQA">QA / Güvenlik Mühendisi</div>
+            <div class="sign-meta"><span id="lblBeSign2">İsim &bull; İmza:</span><span id="lblBeDate2">Tarih: ___ / ___</span></div>
+          </div>
+          <div class="sign-card">
+            <div class="sign-role" id="roleBeDeploy">Canlıya Çıkış (Deploy) Onayı</div>
+            <div class="sign-meta"><span id="lblBeSign3">İsim &bull; İmza:</span><span id="lblBeDate3">Tarih: ___ / ___</span></div>
+          </div>
+        </div>
+
+        <div class="bottom-meta-bar">
+          <span id="footerBrandBE">IT PROJE GÖREV VE KRİTİKLİK ŞABLONU (A4 SİYAH-BEYAZ)</span>
+          <span>FONTLAR: MEDEO SANS / MEDEO MONO &bull; MIT LICENSE</span>
+          <span id="footerPageBE">SAYFA 2 / 2</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: 4 DİL SİSTEMİ, LOCALSTORAGE & VERİ YÖNETİMİ                   -->
+  <!-- ========================================================================= -->
+  <script>
+    // -------------------------------------------------------------------------
+    // 4 DİL SÖZLÜĞÜ (TR, EN, RU, AZ)
+    // -------------------------------------------------------------------------
+    const I18N = {
+      tr: {
+        page_title: "IT Proje Görev ve Kritiklik Seviyesi Şablonu | A4 Siyah-Beyaz Baskı",
+        app_title: "IT Proje Görev & Kritiklik Seviyesi Şablonu",
+        app_sub: "A4 Siyah-Beyaz Baskı ve Çıktı İçin Optimize Edilmiştir • Medeo Typography",
+        backlink: "🗓️ A4 Takvim / Aylık Planlayıcı",
+        view_all: "Tümü (2 Sayfa Önlü-Arkalı)",
+        view_fe: "Sadece Frontend (Sayfa 1)",
+        view_be: "Sadece Admin & Backend (Sayfa 2)",
+        btn_blank: "Boş / Örnek Veri Değiştir",
+        btn_blank_restore: "Örnek Verileri Geri Yükle",
+        btn_export: "JSON Dışa Aktar",
+        btn_import: "JSON İçe Aktar",
+        btn_reset: "Sıfırla",
+        btn_print: "A4 Yazdır / PDF Kaydet (Ctrl+P)",
+        hint: "İpucu: Sayfadaki tüm alanları doğrudan düzenleyebilirsiniz. Rozetlere (P0, P1...) tıklayarak önceliği değiştirin. Değişiklikler otomatik kaydedilir.",
+        doc_title: "IT PROJE GÖREV & KRİTİKLİK TAKİP LİSTESİ",
+        doc_sub_fe: "FRONTEND (İSTEMCİ & KULLANICI ARAYÜZÜ) İŞ LİSTESİ",
+        doc_sub_be: "ADMIN & BACKEND (YÖNETİM PANELİ, API, VERİTABANI & SERVİSLER)",
+        page_fe: "SAYFA 1 / 2 • FRONTEND",
+        page_be: "SAYFA 2 / 2 • ADMIN & BACKEND",
+        lbl_proj: "Proje Adı & Kodu",
+        lbl_sprint: "Sprint / Faz",
+        lbl_date: "Tarih / Versiyon",
+        lbl_release: "Hedef Canlı Tarihi",
+        lbl_arch: "Backend Mimarisi",
+        lbl_env: "Ortam (Environment)",
+        legend_title: "KRİTİKLİK MATRİSİ:",
+        p0_fe: "<b>Blocker:</b> Canlıyı durduran / Güvenlik",
+        p1_fe: "<b>Yüksek:</b> MVP çekirdek akışlar",
+        p2_fe: "<b>Orta:</b> Validasyon / Mobil / Filtre",
+        p3_fe: "<b>Düşük:</b> Kozmetik / Ek özellikler",
+        p0_be: "<b>Blocker:</b> Veri kaybı / Auth açığı / DB kilidi",
+        p1_be: "<b>Yüksek:</b> Çekirdek CRUD / RBAC yetkileri",
+        p2_be: "<b>Orta:</b> Loglama / Dış servisler / Rapor",
+        p3_be: "<b>Düşük:</b> Cron optimizasyon / Arşiv",
+        sec_title_fe: "❚ 1. BÖLÜM: FRONTEND GELİŞTİRME GÖREVLERİ",
+        sec_sub_fe: "UI, UX, CLIENT-SIDE STATE, API CONSUMPTION",
+        sec_title_be: "❚ 2. BÖLÜM: ADMIN PANEL & BACKEND GELİŞTİRME GÖREVLERİ",
+        sec_sub_be: "DATABASE, RBAC YETKİLERİ, CRUD API, AUDIT LOG, SERVİSLER",
+        th_chk: "Dur",
+        th_id: "No",
+        th_pr: "Prio",
+        th_mod: "Modül / Ekran",
+        th_mod_be: "Modül / Katman",
+        th_task: "Görev & İş Tanımı (Kabul Kriteri / Kapsam)",
+        th_own: "Sorumlu",
+        th_eff: "Efor",
+        th_st: "Durum",
+        add_fe: "Frontend Görevi Ekle",
+        add_be: "Backend Görevi Ekle",
+        title_fe_notes: "Frontend Notları, API Bağımlılıkları & Engeller (Blockers)",
+        title_be_notes: "Admin / Backend Notları, Güvenlik Kriterleri & Entegrasyonlar",
+        title_fe_qa: "Frontend QA Kontrol Listesi",
+        title_be_sec: "Backend & DevOps Güvenlik Kontrolü",
+        qa_fe_1: "Cross-Browser (Chrome, Safari, Firefox, Edge)",
+        qa_fe_2: "Mobil / Tablet Responsive Uyumluluk",
+        qa_fe_3: "Konsol Hata & Warning Sıfırlaması",
+        qa_fe_4: "Boş Durumlar (Empty States) & Skeleton",
+        sec_be_1: "SQL Enjeksiyonu & Parametrik Sorgu Testi",
+        sec_be_2: "Rate Limiting & CORS Güvenlik Ayarları",
+        sec_be_3: ".env Gizli Anahtar ve Kimlik Kontrolleri",
+        sec_be_4: "DB Yedekleme & Rollback Senaryosu Hazır",
+        role_fe_lead: "Frontend Lead / Sorumlu",
+        role_design: "UI / UX Tasarım Onayı",
+        role_pm: "Proje Yöneticisi / Tech Lead",
+        role_be_lead: "Backend Lead / Mimar",
+        role_qa: "QA / Güvenlik Mühendisi",
+        role_deploy: "Canlıya Çıkış (Deploy) Onayı",
+        lbl_sign: "İsim • İmza:",
+        lbl_sign_date: "Tarih: ___ / ___",
+        footer_brand: "IT PROJE GÖREV VE KRİTİKLİK ŞABLONU (A4 SİYAH-BEYAZ)",
+        status_in_progress: "[ ] Sürüyor",
+        status_not_started: "[ ] Başlamadı",
+        status_done: "[✓] Bitti",
+        status_pending: "[ ] Beklemede"
+      },
+      en: {
+        page_title: "IT Project Task & Criticality Matrix | A4 Printable Template",
+        app_title: "IT Project Task & Criticality Matrix",
+        app_sub: "Optimized for A4 Black & White Printing & PDF Export • Medeo Typography",
+        backlink: "🗓️ A4 Monthly Project Planner",
+        view_all: "All (2-Page Double-Sided)",
+        view_fe: "Frontend Only (Page 1)",
+        view_be: "Admin & Backend Only (Page 2)",
+        btn_blank: "Toggle Blank / Sample Data",
+        btn_blank_restore: "Restore Sample Data",
+        btn_export: "Export JSON",
+        btn_import: "Import JSON",
+        btn_reset: "Reset",
+        btn_print: "Print A4 / Save PDF (Ctrl+P)",
+        hint: "Tip: All fields are editable directly in the browser. Click badges (P0, P1...) to cycle priority. Changes are auto-saved.",
+        doc_title: "IT PROJECT TASK & CRITICALITY TRACKING MATRIX",
+        doc_sub_fe: "FRONTEND (CLIENT-SIDE & USER INTERFACE) WORK BREAKDOWN",
+        doc_sub_be: "ADMIN & BACKEND (ADMIN PANEL, API, DATABASE & SERVICES)",
+        page_fe: "PAGE 1 / 2 • FRONTEND",
+        page_be: "PAGE 2 / 2 • ADMIN & BACKEND",
+        lbl_proj: "Project Name & Code",
+        lbl_sprint: "Sprint / Phase",
+        lbl_date: "Date / Version",
+        lbl_release: "Target Release Date",
+        lbl_arch: "Backend Architecture",
+        lbl_env: "Environment",
+        legend_title: "CRITICALITY MATRIX:",
+        p0_fe: "<b>Blocker:</b> Halts production / Security flaw",
+        p1_fe: "<b>High:</b> Core MVP user flows",
+        p2_fe: "<b>Medium:</b> Validation / Mobile responsive",
+        p3_fe: "<b>Low:</b> Cosmetic details / Nice-to-have",
+        p0_be: "<b>Blocker:</b> Data loss / Auth flaw / DB deadlock",
+        p1_be: "<b>High:</b> Core CRUD & RBAC permissions",
+        p2_be: "<b>Medium:</b> Logging / External APIs / Export",
+        p3_be: "<b>Low:</b> Cron jobs / Log archival",
+        sec_title_fe: "❚ SECTION 1: FRONTEND DEVELOPMENT TASKS",
+        sec_sub_fe: "UI, UX, CLIENT-SIDE STATE, API CONSUMPTION",
+        sec_title_be: "❚ SECTION 2: ADMIN PANEL & BACKEND DEVELOPMENT TASKS",
+        sec_sub_be: "DATABASE, RBAC ROLES, CRUD API, AUDIT LOG, SERVICES",
+        th_chk: "St",
+        th_id: "ID",
+        th_pr: "Prio",
+        th_mod: "Module / Screen",
+        th_mod_be: "Module / Layer",
+        th_task: "Task & Description (Acceptance Criteria / Scope)",
+        th_own: "Owner",
+        th_eff: "Effort",
+        th_st: "Status",
+        add_fe: "Add Frontend Task",
+        add_be: "Add Backend Task",
+        title_fe_notes: "Frontend Notes, API Dependencies & Blockers",
+        title_be_notes: "Admin / Backend Notes, Security Criteria & Integrations",
+        title_fe_qa: "Frontend QA Checklist",
+        title_be_sec: "Backend & DevOps Security Checklist",
+        qa_fe_1: "Cross-Browser (Chrome, Safari, Firefox, Edge)",
+        qa_fe_2: "Mobile & Tablet Responsive Layout",
+        qa_fe_3: "Zero Console Errors and Warnings",
+        qa_fe_4: "Empty States & Skeleton Loaders Verified",
+        sec_be_1: "SQL Injection & Parameterized Query Audit",
+        sec_be_2: "Rate Limiting & CORS Configuration",
+        sec_be_3: ".env Secret Keys & Credentials Verified",
+        sec_be_4: "DB Backup & Rollback Script Ready",
+        role_fe_lead: "Frontend Lead / Engineer",
+        role_design: "UI / UX Design Sign-off",
+        role_pm: "Project Manager / Tech Lead",
+        role_be_lead: "Backend Lead / Architect",
+        role_qa: "QA / Security Engineer",
+        role_deploy: "Production Deployment Approval",
+        lbl_sign: "Name • Signature:",
+        lbl_sign_date: "Date: ___ / ___",
+        footer_brand: "IT PROJECT TASK & CRITICALITY MATRIX (A4 B&W)",
+        status_in_progress: "[ ] In Progress",
+        status_not_started: "[ ] Not Started",
+        status_done: "[✓] Done",
+        status_pending: "[ ] On Hold"
+      },
+      ru: {
+        page_title: "Матрица задач и критичности IT-проекта | Шаблон А4",
+        app_title: "Матрица задач и критичности IT-проекта",
+        app_sub: "Оптимизировано для ч/б печати А4 и экспорта в PDF • Medeo Typography",
+        backlink: "🗓️ А4 Ежемесячный планировщик",
+        view_all: "Все (2 страницы с двух сторон)",
+        view_fe: "Только Frontend (Стр. 1)",
+        view_be: "Только Admin & Backend (Стр. 2)",
+        btn_blank: "Переключить пустой / пример",
+        btn_blank_restore: "Восстановить пример",
+        btn_export: "Экспорт в JSON",
+        btn_import: "Импорт JSON",
+        btn_reset: "Сбросить",
+        btn_print: "Печать А4 / В PDF (Ctrl+P)",
+        hint: "Подсказка: Все поля редактируются прямо в браузере. Кликните по бейджам (P0, P1...), чтобы изменить приоритет. Сохранение авто.",
+        doc_title: "МАТРИЦА ЗАДАЧ И КРИТИЧНОСТИ IT-ПРОЕКТА",
+        doc_sub_fe: "FRONTEND (КЛИЕНТСКАЯ ЧАСТЬ И ИНТЕРФЕЙС) СПИСОК ЗАДАЧ",
+        doc_sub_be: "ADMIN & BACKEND (ПАНЕЛЬ УПРАВЛЕНИЯ, API, БАЗА ДАННЫХ И СЕРВИСЫ)",
+        page_fe: "СТРАНИЦА 1 / 2 • FRONTEND",
+        page_be: "СТРАНИЦА 2 / 2 • ADMIN & BACKEND",
+        lbl_proj: "Название и код проекта",
+        lbl_sprint: "Спринт / Фаза",
+        lbl_date: "Дата / Версия",
+        lbl_release: "Целевой релиз",
+        lbl_arch: "Архитектура бэкенда",
+        lbl_env: "Окружение (Env)",
+        legend_title: "МАТРИЦА КРИТИЧНОСТИ:",
+        p0_fe: "<b>Блокер:</b> Остановка продакшна / Уязвимость",
+        p1_fe: "<b>Высокий:</b> Основные сценарии MVP",
+        p2_fe: "<b>Средний:</b> Валидация / Адаптив / Фильтры",
+        p3_fe: "<b>Низкий:</b> Косметика / Доп. функции",
+        p0_be: "<b>Блокер:</b> Потеря данных / Сбой auth / Deadlock",
+        p1_be: "<b>Высокий:</b> Базовый CRUD / Права RBAC",
+        p2_be: "<b>Средний:</b> Логирование / Внешние API / Отчеты",
+        p3_be: "<b>Низкий:</b> Cron-задачи / Архивация",
+        sec_title_fe: "❚ РАЗДЕЛ 1: ЗАДАЧИ РАЗРАБОТКИ FRONTEND",
+        sec_sub_fe: "UI, UX, CLIENT-SIDE STATE, API CONSUMPTION",
+        sec_title_be: "❚ РАЗДЕЛ 2: ЗАДАЧИ ADMIN ПАНЕЛИ И BACKEND",
+        sec_sub_be: "DATABASE, RBAC ROLES, CRUD API, AUDIT LOG, SERVICES",
+        th_chk: "Ст",
+        th_id: "№",
+        th_pr: "Прио",
+        th_mod: "Модуль / Экран",
+        th_mod_be: "Модуль / Слой",
+        th_task: "Задача и описание (Критерии приемки / Скоуп)",
+        th_own: "Ответственный",
+        th_eff: "Оценка",
+        th_st: "Статус",
+        add_fe: "Добавить задачу Frontend",
+        add_be: "Добавить задачу Backend",
+        title_fe_notes: "Заметки Frontend, зависимости API и блокеры",
+        title_be_notes: "Заметки Admin / Backend, критерии безопасности и интеграции",
+        title_fe_qa: "Чек-лист QA Frontend",
+        title_be_sec: "Чек-лист безопасности Backend & DevOps",
+        qa_fe_1: "Cross-Browser (Chrome, Safari, Firefox, Edge)",
+        qa_fe_2: "Адаптивность для мобильных и планшетов",
+        qa_fe_3: "Ноль ошибок и предупреждений в консоли",
+        qa_fe_4: "Проверка пустых состояний (Empty) и Skeleton",
+        sec_be_1: "Проверка на SQL Injection и параметризацию",
+        sec_be_2: "Настройки Rate Limiting и политики CORS",
+        sec_be_3: "Проверка секретных ключей .env и доступов",
+        sec_be_4: "Сценарий бэкапа БД и отката (Rollback)",
+        role_fe_lead: "Frontend Lead / Инженер",
+        role_design: "Согласование UI / UX",
+        role_pm: "Руководитель проекта / Tech Lead",
+        role_be_lead: "Backend Lead / Архитектор",
+        role_qa: "QA / Инженер по безопасности",
+        role_deploy: "Допуск в продакшн (Release)",
+        lbl_sign: "Имя • Подпись:",
+        lbl_sign_date: "Дата: ___ / ___",
+        footer_brand: "МАТРИЦА ЗАДАЧ И КРИТИЧНОСТИ IT-ПРОЕКТА (А4 Ч/Б)",
+        status_in_progress: "[ ] В работе",
+        status_not_started: "[ ] Не начато",
+        status_done: "[✓] Готово",
+        status_pending: "[ ] Отложено"
+      },
+      az: {
+        page_title: "İT Layihə Tapşırıq və Kritiklik Səviyyəsi Şablonu | A4 Çap",
+        app_title: "İT Layihə Tapşırıq və Kritiklik Səviyyəsi Şablonu",
+        app_sub: "A4 Qara-Ağ Çap və PDF İxracı Üçün Optimallaşdırılıb • Medeo Typography",
+        backlink: "🗓️ A4 Aylıq Layihə Planlayıcısı",
+        view_all: "Hamısı (2 Səhifə Ön-Arxa)",
+        view_fe: "Yalnız Frontend (Səhifə 1)",
+        view_be: "Yalnız Admin & Backend (Səhifə 2)",
+        btn_blank: "Boş / Nümunə Verilənləri Dəyiş",
+        btn_blank_restore: "Nümunə Verilənləri Bərpa Et",
+        btn_export: "JSON İxrac Et",
+        btn_import: "JSON İdxal Et",
+        btn_reset: "Sıfırla",
+        btn_print: "A4 Çap Et / PDF Saxla (Ctrl+P)",
+        hint: "İpucu: Səhifədəki bütün sahələri birbaşa redaktə edə bilərsiniz. Rozetlərə (P0, P1...) klikləyərək prioriteti dəyişin. Dəyişikliklər avtomatik saxlanılır.",
+        doc_title: "İT LAYİHƏ TAPŞIRIQ VƏ KRİTİKLİK İZLƏMƏ MATRİSİ",
+        doc_sub_fe: "FRONTEND (MÜŞTƏRİ TƏRƏFİ VƏ İSTİFADƏÇİ İNTERFEYSİ) İŞ SİYAHISI",
+        doc_sub_be: "ADMIN & BACKEND (İDARƏETMƏ PANELİ, API, VERİLƏNLƏR BAZASI VƏ SERVİSLƏR)",
+        page_fe: "SƏHİFƏ 1 / 2 • FRONTEND",
+        page_be: "SƏHİFƏ 2 / 2 • ADMIN & BACKEND",
+        lbl_proj: "Layihə Adı və Kodu",
+        lbl_sprint: "Sprint / Mərhələ",
+        lbl_date: "Tarix / Versiya",
+        lbl_release: "Hədəf Buraxılış Tarixi",
+        lbl_arch: "Backend Memarlığı",
+        lbl_env: "Mühit (Environment)",
+        legend_title: "KRİTİKLİK MATRİSİ:",
+        p0_fe: "<b>Bloker:</b> Canlını dayandıran / Təhlükəsizlik xətası",
+        p1_fe: "<b>Yüksək:</b> MVP əsas istifadəçi axınları",
+        p2_fe: "<b>Orta:</b> Validasiya / Mobil uyğunluq / Filtrlər",
+        p3_fe: "<b>Aşağı:</b> Kosmetik / Əlavə xüsusiyyətlər",
+        p0_be: "<b>Bloker:</b> Məlumat itkisi / Auth xətası / DB kilidi",
+        p1_be: "<b>Yüksək:</b> Əsas CRUD və RBAC səlahiyyətləri",
+        p2_be: "<b>Orta:</b> Loqlama / Xarici servislər / Hesabat",
+        p3_be: "<b>Aşağı:</b> Cron işləri / Arxivləmə",
+        sec_title_fe: "❚ 1-Cİ BÖLMƏ: FRONTEND İNKİŞAF ETDİRMƏ TAPŞIRIQLARI",
+        sec_sub_fe: "UI, UX, CLIENT-SIDE STATE, API CONSUMPTION",
+        sec_title_be: "❚ 2-Cİ BÖLMƏ: ADMİN PANEL VƏ BACKEND TAPŞIRIQLARI",
+        sec_sub_be: "DATABASE, RBAC ROLES, CRUD API, AUDIT LOG, SERVICES",
+        th_chk: "Vəz",
+        th_id: "№",
+        th_pr: "Prio",
+        th_mod: "Modul / Ekran",
+        th_mod_be: "Modul / Lay",
+        th_task: "Tapşırıq və Təsvir (Qəbul Kriteriyaları / Əhatə)",
+        th_own: "Məsul",
+        th_eff: "Zəhmət",
+        th_st: "Status",
+        add_fe: "Frontend Tapşırığı Əlavə Et",
+        add_be: "Backend Tapşırığı Əlavə Et",
+        title_fe_notes: "Frontend Qeydləri, API Asılılıqları və Blokerlər",
+        title_be_notes: "Admin / Backend Qeydləri, Təhlükəsizlik Kriteriyaları və İnteqrasiyalar",
+        title_fe_qa: "Frontend QA Yoxlama Siyahısı",
+        title_be_sec: "Backend və DevOps Təhlükəsizlik Nəzarəti",
+        qa_fe_1: "Cross-Browser (Chrome, Safari, Firefox, Edge)",
+        qa_fe_2: "Mobil və Planşet Responsive Uyğunluq",
+        qa_fe_3: "Konsolda Sıfır Xəta və Xəbərdarlıq",
+        qa_fe_4: "Boş Vəziyyətlər (Empty States) və Skeleton Yoxlanışı",
+        sec_be_1: "SQL Injection və Parametrik Sorğu Nəzarəti",
+        sec_be_2: "Rate Limiting və CORS Təhlükəsizlik Tənzimləmələri",
+        sec_be_3: ".env Məxfi Açarlar və Giriş Nəzarəti",
+        sec_be_4: "DB Ehtiyat Nüsxəsi və Rollback Planı Hazır",
+        role_fe_lead: "Frontend Rəhbəri / Məsul",
+        role_design: "UI / UX Dizayn Təsdiqi",
+        role_pm: "Layihə Meneceri / Tech Lead",
+        role_be_lead: "Backend Rəhbəri / Memar",
+        role_qa: "QA / Təhlükəsizlik Mühəndisi",
+        role_deploy: "İstehsala Buraxılış (Deploy) Təsdiqi",
+        lbl_sign: "Ad • İmza:",
+        lbl_sign_date: "Tarix: ___ / ___",
+        footer_brand: "İT LAYİHƏ TAPŞIRIQ VƏ KRİTİKLİK ŞABLONU (A4 QARA-AĞ)",
+        status_in_progress: "[ ] Davam edir",
+        status_not_started: "[ ] Başlamayıb",
+        status_done: "[✓] Bitdi",
+        status_pending: "[ ] Gözləmədə"
+      }
+    };
+
+    // -------------------------------------------------------------------------
+    // DİLE GÖRE HAZIR ÖRNEK GÖREVLER
+    // -------------------------------------------------------------------------
+    const SAMPLE_TASKS = {
+      tr: {
+        fe: [
+          { id: 'FE-01', prio: 'P0', checked: false, module: 'Kimlik / Auth', title: 'Giriş / Kayıt Formu ve JWT Token Yönetimi', desc: 'Zod validasyonu, cookie/localStorage güvenli token saklama, 401 redirect', owner: 'Ahmet K.', effort: '3g', status: '[ ] Sürüyor' },
+          { id: 'FE-02', prio: 'P0', checked: false, module: 'Routing & Guard', title: 'Korumalı Rotalar (Protected Routes) ve Yetki Guard\'ı', desc: 'Giriş yapmamış kullanıcıların dashboard ekranlarına erişiminin engellenmesi', owner: 'Zeynep D.', effort: '2g', status: '[ ] Sürüyor' },
+          { id: 'FE-03', prio: 'P1', checked: false, module: 'Dashboard UI', title: 'Müşteri Ana Kontrol Paneli ve Özet Kartları', desc: 'Metrik kartları, son işlemler listesi ve skeleton loader durumları', owner: 'Ahmet K.', effort: '4g', status: '[ ] Başlamadı' },
+          { id: 'FE-04', prio: 'P1', checked: false, module: 'Sipariş & Form', title: 'Çok Adımlı Sipariş Oluşturma Formu (Stepper)', desc: 'Adım adım veri doğrulama, ürün seçimi, adres seçimi ve sepet özeti', owner: 'Can B.', effort: '5g', status: '[ ] Başlamadı' },
+          { id: 'FE-05', prio: 'P1', checked: true, module: 'API Entegrasyon', title: 'Global HTTP İstemcisi & Otomatik Token Refresh', desc: 'Axios/Fetch interceptor\'ları, 403 ve 500 merkezi hata yakalama mekanizması', owner: 'Zeynep D.', effort: '2g', status: '[✓] Bitti' },
+          { id: 'FE-06', prio: 'P2', checked: false, module: 'Responsive / Mobil', title: 'Mobil Uyumluluk & Hamburger Menü Optimizasyonu', desc: '320px-768px cihazlarda taşmaların önlenmesi, dokunmatik kontroller', owner: 'Can B.', effort: '3g', status: '[ ] Başlamadı' },
+          { id: 'FE-07', prio: 'P2', checked: false, module: 'Bildirim / Feedback', title: 'Toast Mesajları ve Onay Dialog Modal Bileşenleri', desc: 'Silme/güncelleme işlemleri öncesi onay modalleri ve toast kuyruğu', owner: 'Ahmet K.', effort: '1.5g', status: '[ ] Başlamadı' },
+          { id: 'FE-08', prio: 'P3', checked: false, module: 'Tema & Dark Mode', title: 'Koyu / Açık Tema Seçicisi ve Tercih Saklama', desc: 'Sistem temasını algılama ve kullanıcı tercihini localStorage\'da tutma', owner: 'Can B.', effort: '1g', status: '[ ] Beklemede' }
+        ],
+        be: [
+          { id: 'BE-01', prio: 'P0', checked: true, module: 'DB & Migration', title: 'Veritabanı Şeması ve Tablo Migrasyonları', desc: 'Users, Roles, Permissions, Orders, AuditLog tabloları, indexler ve foreign keys', owner: 'Murat S.', effort: '3g', status: '[✓] Bitti' },
+          { id: 'BE-02', prio: 'P0', checked: false, module: 'Yetki / RBAC', title: 'Admin Rol ve İzin Yönetimi (Role-Based Access Control)', desc: 'SuperAdmin, Editör, Muhasebe rolleri; endpoint bazlı middleware kontrolü', owner: 'Murat S.', effort: '4g', status: '[ ] Sürüyor' },
+          { id: 'BE-03', prio: 'P0', checked: false, module: 'Auth & Session', title: 'Admin Login, Parola Hash (Argon2/Bcrypt) ve 2FA Altyapısı', desc: 'Brute-force koruması, hesap kilitleme, JWT blacklisting / refresh mekanizması', owner: 'Elif T.', effort: '3.5g', status: '[ ] Sürüyor' },
+          { id: 'BE-04', prio: 'P1', checked: false, module: 'Admin CRUD API', title: 'Müşteri ve Kullanıcı Yönetimi REST API Servisleri', desc: 'Sayfalama (pagination), çoklu filtreleme, sıralama, yumuşak silme (soft delete)', owner: 'Elif T.', effort: '4g', status: '[ ] Başlamadı' },
+          { id: 'BE-05', prio: 'P1', checked: false, module: 'İş Mantığı / Sipariş', title: 'Sipariş Onay ve Durum Geçiş State Machine Servisi', desc: 'DB transaction bütünlüğü, stok düşümü, bildirim kuyruğuna event gönderme', owner: 'Murat S.', effort: '5g', status: '[ ] Başlamadı' },
+          { id: 'BE-06', prio: 'P1', checked: false, module: 'Güvenlik / Denetim', title: 'Admin Değişiklik Günlüğü (Audit Log) Takip Sistemi', desc: 'Kim, ne zaman, hangi kaydı değiştirdi (önceki/sonraki veri JSON kaydı)', owner: 'Elif T.', effort: '2.5g', status: '[ ] Başlamadı' },
+          { id: 'BE-07', prio: 'P2', checked: false, module: 'Raporlama / Export', title: 'Excel / CSV Dışa Aktarma ve İstatistik Özet Endpoint\'i', desc: 'Büyük veride streaming export, admin anasayfa ciro ve kullanıcı metrikleri', owner: 'Murat S.', effort: '3g', status: '[ ] Beklemede' },
+          { id: 'BE-08', prio: 'P3', checked: false, module: 'Arka Plan / Cron', title: 'Gece Çalışan Veritabanı Yedekleme ve Temizlik İşi', desc: 'S3\'e otomatik pg_dump aktarımı ve 30 günü geçen logların arşivlenmesi', owner: 'DevOps', effort: '1.5g', status: '[ ] Beklemede' }
+        ]
+      },
+      en: {
+        fe: [
+          { id: 'FE-01', prio: 'P0', checked: false, module: 'Auth & Security', title: 'Sign-in / Registration Form & JWT Token Storage', desc: 'Zod validation, secure cookie/localStorage storage, 401 redirect handling', owner: 'Alex K.', effort: '3d', status: '[ ] In Progress' },
+          { id: 'FE-02', prio: 'P0', checked: false, module: 'Routing & Guard', title: 'Protected Routes & Role-Based Client Guard', desc: 'Prevent unauthorized users from accessing dashboard and sensitive screens', owner: 'Sarah D.', effort: '2d', status: '[ ] In Progress' },
+          { id: 'FE-03', prio: 'P1', checked: false, module: 'Dashboard UI', title: 'Main Analytics Dashboard & Metric Summary Cards', desc: 'KPI cards, recent activity table, and skeleton loading placeholder states', owner: 'Alex K.', effort: '4d', status: '[ ] Not Started' },
+          { id: 'FE-04', prio: 'P1', checked: false, module: 'Orders & Form', title: 'Multi-Step Order Checkout Wizard (Stepper)', desc: 'Step-by-step validation, item selection, delivery address, order summary', owner: 'Brian M.', effort: '5d', status: '[ ] Not Started' },
+          { id: 'FE-05', prio: 'P1', checked: true, module: 'API Client', title: 'Global HTTP Client & Automated Token Refresh', desc: 'Axios/Fetch interceptors, centralized 403 & 500 error handling toasts', owner: 'Sarah D.', effort: '2d', status: '[✓] Done' },
+          { id: 'FE-06', prio: 'P2', checked: false, module: 'Mobile / Responsive', title: 'Mobile Viewport Optimization & Drawer Menu', desc: '320px-768px layout overflow fix, touch target accessibility compliance', owner: 'Brian M.', effort: '3d', status: '[ ] Not Started' },
+          { id: 'FE-07', prio: 'P2', checked: false, module: 'Feedback / UI', title: 'Toast Notification Queue & Modal Dialogs', desc: 'Destructive action confirmation dialogs, toast queue with auto-dismiss', owner: 'Alex K.', effort: '1.5d', status: '[ ] Not Started' },
+          { id: 'FE-08', prio: 'P3', checked: false, module: 'Theming / Dark Mode', title: 'Dark / Light Mode Toggle & User Preference Sync', desc: 'Detect OS color scheme preference and persist user choice in storage', owner: 'Brian M.', effort: '1d', status: '[ ] On Hold' }
+        ],
+        be: [
+          { id: 'BE-01', prio: 'P0', checked: true, module: 'DB & Migrations', title: 'Database Schema & Table Migration Scripts', desc: 'Users, Roles, Permissions, Orders, AuditLog tables, indexes and foreign keys', owner: 'Mark S.', effort: '3d', status: '[✓] Done' },
+          { id: 'BE-02', prio: 'P0', checked: false, module: 'RBAC Authorization', title: 'Admin Role & Permission Management Middleware', desc: 'SuperAdmin, Editor, Accounting hierarchy; route-level middleware guards', owner: 'Mark S.', effort: '4d', status: '[ ] In Progress' },
+          { id: 'BE-03', prio: 'P0', checked: false, module: 'Auth & Sessions', title: 'Admin Login, Argon2/Bcrypt Password Hash & 2FA', desc: 'Brute-force protection, account lock, JWT blacklisting & refresh pipeline', owner: 'Elena T.', effort: '3.5d', status: '[ ] In Progress' },
+          { id: 'BE-04', prio: 'P1', checked: false, module: 'Admin CRUD API', title: 'User & Customer Management RESTful API Endpoints', desc: 'Pagination, multi-field search, sorting, soft-delete implementation', owner: 'Elena T.', effort: '4d', status: '[ ] Not Started' },
+          { id: 'BE-05', prio: 'P1', checked: false, module: 'Business / Orders', title: 'Order State Machine & Atomic Transaction Workflow', desc: 'DB ACID transaction locks, stock deduction, notification queue events', owner: 'Mark S.', effort: '5d', status: '[ ] Not Started' },
+          { id: 'BE-06', prio: 'P1', checked: false, module: 'Audit & Compliance', title: 'Admin Mutation Audit Log & Change Tracker', desc: 'Who changed what and when (JSON diff of before/after state records)', owner: 'Elena T.', effort: '2.5d', status: '[ ] Not Started' },
+          { id: 'BE-07', prio: 'P2', checked: false, module: 'Reporting & Export', title: 'Excel / CSV Streaming Export & Analytics API', desc: 'Low-memory streaming export for large datasets, dashboard metric endpoints', owner: 'Mark S.', effort: '3d', status: '[ ] On Hold' },
+          { id: 'BE-08', prio: 'P3', checked: false, module: 'Background / Cron', title: 'Scheduled Database Backup & Log Rotation Job', desc: 'Automated pg_dump upload to S3, archive application logs older than 30d', owner: 'DevOps', effort: '1.5d', status: '[ ] On Hold' }
+        ]
+      },
+      ru: {
+        fe: [
+          { id: 'FE-01', prio: 'P0', checked: false, module: 'Авторизация / Auth', title: 'Форма входа / регистрации и JWT токен менеджмент', desc: 'Валидация Zod, безопасное хранение куки/localStorage, редирект 401', owner: 'Алексей К.', effort: '3д', status: '[ ] В работе' },
+          { id: 'FE-02', prio: 'P0', checked: false, module: 'Маршрутизация', title: 'Защищенные роуты (Protected Routes) и Route Guard', desc: 'Запрет доступа неавторизованным пользователям к панели управления', owner: 'Дарья С.', effort: '2д', status: '[ ] В работе' },
+          { id: 'FE-03', prio: 'P1', checked: false, module: 'Dashboard UI', title: 'Главная панель аналитики и карточки метрик', desc: 'Карточки KPI, список последних операций, заглушки skeleton loader', owner: 'Алексей К.', effort: '4д', status: '[ ] Не начато' },
+          { id: 'FE-04', prio: 'P1', checked: false, module: 'Заказы / Формы', title: 'Пошаговый мастер создания заказа (Stepper)', desc: 'Поэтапная валидация, выбор товара, адрес доставки, сводка корзины', owner: 'Иван Б.', effort: '5д', status: '[ ] Не начато' },
+          { id: 'FE-05', prio: 'P1', checked: true, module: 'API Клиент', title: 'Глобальный HTTP клиент и авто-обновление токена', desc: 'Интерцепторы Axios/Fetch, централизованный перехват ошибок 403 и 500', owner: 'Дарья С.', effort: '2д', status: '[✓] Готово' },
+          { id: 'FE-06', prio: 'P2', checked: false, module: 'Мобильный адаптив', title: 'Оптимизация под мобильные и меню-гамбургер', desc: 'Устранение горизонтальной прокрутки 320-768px, размер кликабельных зон', owner: 'Иван Б.', effort: '3д', status: '[ ] Не начато' },
+          { id: 'FE-07', prio: 'P2', checked: false, module: 'Уведомления', title: 'Очередь всплывающих Toast-сообщений и модалки', desc: 'Модальные окна подтверждения удаления/изменения, авто-скрытие тостов', owner: 'Алексей К.', effort: '1.5д', status: '[ ] Не начато' },
+          { id: 'FE-08', prio: 'P3', checked: false, module: 'Темы оформления', title: 'Переключатель темной / светлой темы', desc: 'Определение системных настроек ОС и сохранение выбора в браузере', owner: 'Иван Б.', effort: '1д', status: '[ ] Отложено' }
+        ],
+        be: [
+          { id: 'BE-01', prio: 'P0', checked: true, module: 'БД и миграции', title: 'Схема базы данных и скрипты миграций таблиц', desc: 'Таблицы Users, Roles, Permissions, Orders, AuditLog, внешние ключи и индексы', owner: 'Михаил С.', effort: '3д', status: '[✓] Готово' },
+          { id: 'BE-02', prio: 'P0', checked: false, module: 'Права и RBAC', title: 'Управление ролями и правами администраторов', desc: 'Иерархия SuperAdmin, Editor, Бухгалтер; middleware контроль доступа к API', owner: 'Михаил С.', effort: '4д', status: '[ ] В работе' },
+          { id: 'BE-03', prio: 'P0', checked: false, module: 'Аутентификация', title: 'Вход администратора, хеширование паролей и 2FA', desc: 'Защита от brute-force, блокировка попыток, blacklisting и refresh токенов', owner: 'Елена Т.', effort: '3.5д', status: '[ ] В работе' },
+          { id: 'BE-04', prio: 'P1', checked: false, module: 'Admin CRUD API', title: 'RESTful API управления пользователями и клиентами', desc: 'Пагинация, фильтрация по полям, сортировка, мягкое удаление (soft delete)', owner: 'Елена Т.', effort: '4д', status: '[ ] Не начато' },
+          { id: 'BE-05', prio: 'P1', checked: false, module: 'Бизнес-логика', title: 'State Machine переходов статусов заказов', desc: 'ACID транзакции в БД, списание остатков склада, отправка событий в очередь', owner: 'Михаил С.', effort: '5д', status: '[ ] Не начато' },
+          { id: 'BE-06', prio: 'P1', checked: false, module: 'Аудит действий', title: 'Система журнала изменений администраторов (Audit Log)', desc: 'Фиксация кто, когда и что изменил (diff до и после в формате JSON)', owner: 'Елена Т.', effort: '2.5д', status: '[ ] Не начато' },
+          { id: 'BE-07', prio: 'P2', checked: false, module: 'Экспорт и отчеты', title: 'Потоковый экспорт в Excel / CSV и сводный API', desc: 'Экспорт без перегрузки памяти для больших выборок, эндпоинты аналитики', owner: 'Михаил С.', effort: '3д', status: '[ ] Отложено' },
+          { id: 'BE-08', prio: 'P3', checked: false, module: 'Фоновые задачи', title: 'Периодическое резервное копирование БД и ротация логов', desc: 'Скрипт pg_dump в хранилище S3, архивация логов старше 30 дней', owner: 'DevOps', effort: '1.5д', status: '[ ] Отложено' }
+        ]
+      },
+      az: {
+        fe: [
+          { id: 'FE-01', prio: 'P0', checked: false, module: 'Kimlik / Auth', title: 'Daxilolma / Qeydiyyat Formu və JWT Token İdarəetməsi', desc: 'Zod validasiyası, cookie/localStorage təhlükəsiz token saxlama, 401 yönləndirmə', owner: 'Əhməd Q.', effort: '3g', status: '[ ] Davam edir' },
+          { id: 'FE-02', prio: 'P0', checked: false, module: 'Routing & Guard', title: 'Qorunan Marşrutlar (Protected Routes) və Səlahiyyət Nəzarəti', desc: 'Daxil olmamış istifadəçilərin idarəetmə panelinə daxil olmasının qarşısının alınması', owner: 'Zeynəb D.', effort: '2g', status: '[ ] Davam edir' },
+          { id: 'FE-03', prio: 'P1', checked: false, module: 'Dashboard UI', title: 'Əsas Analitika İdarə Paneli və Metrika Kartları', desc: 'KPI kartları, son əməliyyatlar siyahısı və skeleton loader yüklənmə halları', owner: 'Əhməd Q.', effort: '4g', status: '[ ] Başlamayıb' },
+          { id: 'FE-04', prio: 'P1', checked: false, module: 'Sifariş & Form', title: 'Çox Addımlı Sifariş Yaratma Formu (Stepper)', desc: 'Addım-addım validasiya, məhsul seçimi, çatdırılma ünvanı və səbət icmalı', owner: 'Cavid B.', effort: '5g', status: '[ ] Başlamayıb' },
+          { id: 'FE-05', prio: 'P1', checked: true, module: 'API İnteqrasiya', title: 'Qlobal HTTP Müştərisi və Avtomatik Token Yenilənməsi', desc: 'Axios/Fetch interseptorları, mərkəzləşdirilmiş 403 və 500 xəta idarəetməsi', owner: 'Zeynəb D.', effort: '2g', status: '[✓] Bitdi' },
+          { id: 'FE-06', prio: 'P2', checked: false, module: 'Mobil / Responsive', title: 'Mobil Uyğunluq və Naviqasiya Menyu Optimizasiyası', desc: '320px-768px cihazlarda daşmaların qarşısının alınması, sensor idarəetmə', owner: 'Cavid B.', effort: '3g', status: '[ ] Başlamayıb' },
+          { id: 'FE-07', prio: 'P2', checked: false, module: 'Bildiriş / UI', title: 'Toast Bildirişləri və Təsdiq Modal Pəncərələri', desc: 'Silmə/dəyişmə əməliyyatları öncəsi təsdiq dialoqları və bildiriş növbəsi', owner: 'Əhməd Q.', effort: '1.5g', status: '[ ] Başlamayıb' },
+          { id: 'FE-08', prio: 'P3', checked: false, module: 'Mövzu Seçimi', title: 'Qaranlıq / İşıqlı Mövzu Seçicisi və Saxlanması', desc: 'Sistem temasını aşkarlama və istifadəçi seçimini brauzer yaddaşında saxlama', owner: 'Cavid B.', effort: '1g', status: '[ ] Gözləmədə' }
+        ],
+        be: [
+          { id: 'BE-01', prio: 'P0', checked: true, module: 'DB & Miqrasiyalar', title: 'Verilənlər Bazası Sxemi və Cədvəl Miqrasiyaları', desc: 'Users, Roles, Permissions, Orders, AuditLog cədvəlləri, indekslər və foreign keys', owner: 'Murad S.', effort: '3g', status: '[✓] Bitdi' },
+          { id: 'BE-02', prio: 'P0', checked: false, module: 'Səlahiyyət / RBAC', title: 'Admin Rol və İcazə İdarəetməsi (Role-Based Access Control)', desc: 'SuperAdmin, Redaktor, Mühasib rolları; endpoint əsaslı middleware yoxlaması', owner: 'Murad S.', effort: '4g', status: '[ ] Davam edir' },
+          { id: 'BE-03', prio: 'P0', checked: false, module: 'Auth & Təhlükəsizlik', title: 'Admin Girişi, Parol Hash (Argon2/Bcrypt) və 2FA Altyapısı', desc: 'Brute-force müdafiəsi, hesab kilidlənməsi, JWT blacklisting / refresh boru kəməri', owner: 'Elif T.', effort: '3.5g', status: '[ ] Davam edir' },
+          { id: 'BE-04', prio: 'P1', checked: false, module: 'Admin CRUD API', title: 'İstifadəçi və Müştəri İdarəetməsi REST API Servisləri', desc: 'Səhifələmə (pagination), çoxlu filtrləmə, sıralama, yumşaq silmə (soft delete)', owner: 'Elif T.', effort: '4g', status: '[ ] Başlamayıb' },
+          { id: 'BE-05', prio: 'P1', checked: false, module: 'Biznes Məntiqi', title: 'Sifariş Təsdiqi və Vəziyyət Keçidləri State Machine Servisi', desc: 'DB transaction bütövlüyü, stok silinməsi, bildiriş növbəsinə event göndərilməsi', owner: 'Murad S.', effort: '5g', status: '[ ] Başlamayıb' },
+          { id: 'BE-06', prio: 'P1', checked: false, module: 'Audit & Nəzarət', title: 'Admin Dəyişiklik Jurnalı (Audit Log) İzləmə Sistemi', desc: 'Kim, nə vaxt, hansı qeydi dəyişdi (əvvəlki və sonrakı JSON fərqi)', owner: 'Elif T.', effort: '2.5g', status: '[ ] Başlamayıb' },
+          { id: 'BE-07', prio: 'P2', checked: false, module: 'Hesabat & İxrac', title: 'Excel / CSV Axın İxracı və Statistik Xülasə API-si', desc: 'Böyük verilənlərdə yaddaş qənaəti ilə streaming export, idarə paneli metrikləri', owner: 'Murad S.', effort: '3g', status: '[ ] Gözləmədə' },
+          { id: 'BE-08', prio: 'P3', checked: false, module: 'Fon İşləri / Cron', title: 'Gecə İşləyən Avtomatik DB Yedəkləmə və Təmizlik İşi', desc: 'S3-ə avtomatik pg_dump yüklənməsi və 30 gündən köhnə logların arxivlənməsi', owner: 'DevOps', effort: '1.5g', status: '[ ] Gözləmədə' }
+        ]
+      }
+    };
+
+    let currentLang = 'tr';
+    let feTasks = [];
+    let beTasks = [];
+    let isBlankMode = false;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Dil tənzimləməsi (URL parametrlərindən və ya localStorage-dən)
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      const savedLang = localStorage.getItem('it_template_lang');
+
+      if (urlLang && I18N[urlLang]) {
+        currentLang = urlLang;
+      } else if (savedLang && I18N[savedLang]) {
+        currentLang = savedLang;
+      } else {
+        currentLang = 'tr';
+      }
+
+      loadState();
+      applyLanguage(currentLang);
+      renderAll();
+      attachAutoSave();
+    });
+
+    function changeLanguage(lang) {
+      if (!I18N[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('it_template_lang', lang);
+
+      // Əgər istifadəçi fərqli bir layihə tapşırıqları daxil etməyibsə, nümunə tapşırıqları seçilən dildə yenilə
+      const isCustomized = localStorage.getItem('it_template_user_customized') === 'true';
+      if (!isCustomized) {
+        feTasks = JSON.parse(JSON.stringify(SAMPLE_TASKS[lang].fe));
+        beTasks = JSON.parse(JSON.stringify(SAMPLE_TASKS[lang].be));
+        saveState();
+      }
+
+      applyLanguage(lang);
+      renderAll();
+    }
+
+    function applyLanguage(lang) {
+      const dict = I18N[lang];
+      document.documentElement.lang = lang;
+
+      // Dil düymələri aktivlik sinfi
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('lang-' + lang);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Tərcümələrin DOM-a tətbiqi
+      document.getElementById('pageBrowserTitle').innerText = dict.page_title;
+      document.getElementById('uiAppTitle').innerText = dict.app_title;
+      document.getElementById('uiAppSubtitle').innerText = dict.app_sub;
+      document.getElementById('uiBacklinkText').innerText = dict.backlink;
+      document.getElementById('btnViewAll').innerText = dict.view_all;
+      document.getElementById('btnViewFE').innerText = dict.view_fe;
+      document.getElementById('btnViewBE').innerText = dict.view_be;
+      document.getElementById('uiBtnBlank').innerText = isBlankMode ? dict.btn_blank_restore : dict.btn_blank;
+      document.getElementById('uiBtnExport').innerText = dict.btn_export;
+      document.getElementById('uiBtnImport').innerText = dict.btn_import;
+      document.getElementById('uiBtnReset').innerText = dict.btn_reset;
+      document.getElementById('uiBtnPrint').innerText = dict.btn_print;
+      document.getElementById('uiToolbarHint').innerText = dict.hint;
+
+      // Sənəd Başlıqları
+      document.getElementById('docTitleFE').innerText = dict.doc_title;
+      document.getElementById('docSubFE').innerText = dict.doc_sub_fe;
+      document.getElementById('pageIndicatorFE').innerText = dict.page_fe;
+      document.getElementById('docTitleBE').innerText = dict.doc_title;
+      document.getElementById('docSubBE').innerText = dict.doc_sub_be;
+      document.getElementById('pageIndicatorBE').innerText = dict.page_be;
+
+      // Meta etiketləri
+      document.getElementById('lblFeProj').innerText = dict.lbl_proj;
+      document.getElementById('lblFeSprint').innerText = dict.lbl_sprint;
+      document.getElementById('lblFeDate').innerText = dict.lbl_date;
+      document.getElementById('lblFeRelease').innerText = dict.lbl_release;
+      document.getElementById('lblBeProj').innerText = dict.lbl_proj;
+      document.getElementById('lblBeArch').innerText = dict.lbl_arch;
+      document.getElementById('lblBeEnv').innerText = dict.lbl_env;
+      document.getElementById('lblBeRelease').innerText = dict.lbl_release;
+
+      // Legend
+      document.getElementById('legendTitleFE').innerText = dict.legend_title;
+      document.getElementById('legendTitleBE').innerText = dict.legend_title;
+      document.getElementById('legP0FE').innerHTML = dict.p0_fe;
+      document.getElementById('legP1FE').innerHTML = dict.p1_fe;
+      document.getElementById('legP2FE').innerHTML = dict.p2_fe;
+      document.getElementById('legP3FE').innerHTML = dict.p3_fe;
+      document.getElementById('legP0BE').innerHTML = dict.p0_be;
+      document.getElementById('legP1BE').innerHTML = dict.p1_be;
+      document.getElementById('legP2BE').innerHTML = dict.p2_be;
+      document.getElementById('legP3BE').innerHTML = dict.p3_be;
+
+      // Bölmə Başlıqları
+      document.getElementById('secTitleFE').innerText = dict.sec_title_fe;
+      document.getElementById('secSubFE').innerText = dict.sec_sub_fe;
+      document.getElementById('secTitleBE').innerText = dict.sec_title_be;
+      document.getElementById('secSubBE').innerText = dict.sec_sub_be;
+
+      // Cədvəl Başlıqları
+      document.getElementById('thChkFE').innerText = dict.th_chk;
+      document.getElementById('thIdFE').innerText = dict.th_id;
+      document.getElementById('thPrFE').innerText = dict.th_pr;
+      document.getElementById('thModFE').innerText = dict.th_mod;
+      document.getElementById('thTaskFE').innerText = dict.th_task;
+      document.getElementById('thOwnFE').innerText = dict.th_own;
+      document.getElementById('thEffFE').innerText = dict.th_eff;
+      document.getElementById('thStFE').innerText = dict.th_st;
+      document.getElementById('uiAddRowFE').innerText = dict.add_fe;
+
+      document.getElementById('thChkBE').innerText = dict.th_chk;
+      document.getElementById('thIdBE').innerText = dict.th_id;
+      document.getElementById('thPrBE').innerText = dict.th_pr;
+      document.getElementById('thModBE').innerText = dict.th_mod_be;
+      document.getElementById('thTaskBE').innerText = dict.th_task;
+      document.getElementById('thOwnBE').innerText = dict.th_own;
+      document.getElementById('thEffBE').innerText = dict.th_eff;
+      document.getElementById('thStBE').innerText = dict.th_st;
+      document.getElementById('uiAddRowBE').innerText = dict.add_be;
+
+      // Alt Kartlar & QA
+      document.getElementById('titleFeNotes').innerText = dict.title_fe_notes;
+      document.getElementById('titleBeNotes').innerText = dict.title_be_notes;
+      document.getElementById('titleFeQA').innerText = dict.title_fe_qa;
+      document.getElementById('titleBeSec').innerText = dict.title_be_sec;
+      document.getElementById('qaFE1').innerText = dict.qa_fe_1;
+      document.getElementById('qaFE2').innerText = dict.qa_fe_2;
+      document.getElementById('qaFE3').innerText = dict.qa_fe_3;
+      document.getElementById('qaFE4').innerText = dict.qa_fe_4;
+      document.getElementById('secBE1').innerText = dict.sec_be_1;
+      document.getElementById('secBE2').innerText = dict.sec_be_2;
+      document.getElementById('secBE3').innerText = dict.sec_be_3;
+      document.getElementById('secBE4').innerText = dict.sec_be_4;
+
+      // İmzalar
+      document.getElementById('roleFeLead').innerText = dict.role_fe_lead;
+      document.getElementById('roleUIDesign').innerText = dict.role_design;
+      document.getElementById('roleFePM').innerText = dict.role_pm;
+      document.getElementById('roleBeLead').innerText = dict.role_be_lead;
+      document.getElementById('roleBeQA').innerText = dict.role_qa;
+      document.getElementById('roleBeDeploy').innerText = dict.role_deploy;
+
+      document.getElementById('lblFeSign1').innerText = dict.lbl_sign;
+      document.getElementById('lblFeDate1').innerText = dict.lbl_sign_date;
+      document.getElementById('lblFeSign2').innerText = dict.lbl_sign;
+      document.getElementById('lblFeDate2').innerText = dict.lbl_sign_date;
+      document.getElementById('lblFeSign3').innerText = dict.lbl_sign;
+      document.getElementById('lblFeDate3').innerText = dict.lbl_sign_date;
+
+      document.getElementById('lblBeSign1').innerText = dict.lbl_sign;
+      document.getElementById('lblBeDate1').innerText = dict.lbl_sign_date;
+      document.getElementById('lblBeSign2').innerText = dict.lbl_sign;
+      document.getElementById('lblBeDate2').innerText = dict.lbl_sign_date;
+      document.getElementById('lblBeSign3').innerText = dict.lbl_sign;
+      document.getElementById('lblBeDate3').innerText = dict.lbl_sign_date;
+
+      document.getElementById('footerBrandFE').innerText = dict.footer_brand;
+      document.getElementById('footerBrandBE').innerText = dict.footer_brand;
+      document.getElementById('footerPageFE').innerText = dict.page_fe;
+      document.getElementById('footerPageBE').innerText = dict.page_be;
+    }
+
+    // -------------------------------------------------------------------------
+    // VƏZİYYƏT (STATE) İDARƏETMƏSİ & RENDER
+    // -------------------------------------------------------------------------
+    function loadState() {
+      const savedFE = localStorage.getItem('it_template_fe_tasks');
+      const savedBE = localStorage.getItem('it_template_be_tasks');
+
+      feTasks = savedFE ? JSON.parse(savedFE) : JSON.parse(JSON.stringify(SAMPLE_TASKS[currentLang].fe));
+      beTasks = savedBE ? JSON.parse(savedBE) : JSON.parse(JSON.stringify(SAMPLE_TASKS[currentLang].be));
+
+      document.querySelectorAll('.store-state').forEach(el => {
+        const key = 'it_meta_' + el.id;
+        const val = localStorage.getItem(key);
+        if (val !== null) {
+          if (el.tagName === 'INPUT') el.value = val;
+          else el.innerText = val;
+        }
+      });
+    }
+
+    function saveState() {
+      localStorage.setItem('it_template_fe_tasks', JSON.stringify(feTasks));
+      localStorage.setItem('it_template_be_tasks', JSON.stringify(beTasks));
+
+      document.querySelectorAll('.store-state').forEach(el => {
+        const key = 'it_meta_' + el.id;
+        const val = el.tagName === 'INPUT' ? el.value : el.innerText;
+        localStorage.setItem(key, val);
+      });
+    }
+
+    function attachAutoSave() {
+      document.addEventListener('input', (e) => {
+        if (e.target.classList.contains('store-state') || e.target.classList.contains('cell-editable')) {
+          localStorage.setItem('it_template_user_customized', 'true');
+          saveState();
+        }
+      });
+    }
+
+    function renderTable(type) {
+      const list = type === 'fe' ? feTasks : beTasks;
+      const tbody = document.getElementById(type === 'fe' ? 'feTableBody' : 'beTableBody');
+      tbody.innerHTML = '';
+
+      list.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        const prioClass = 'prio-' + (item.prio || 'p2').toLowerCase();
+        const isChecked = item.checked ? 'checked' : '';
+
+        tr.innerHTML = `
+          <td class="col-chk">
+            <span class="custom-check ${isChecked}" onclick="toggleTaskCheck('${type}', ${index})"></span>
+          </td>
+          <td class="col-id">
+            <span class="task-id">${item.id || (type.toUpperCase() + '-' + (index < 9 ? '0' : '') + (index + 1))}</span>
+          </td>
+          <td class="col-pr">
+            <span class="prio-badge ${prioClass}" onclick="cyclePrio('${type}', ${index})">${item.prio || 'P2'}</span>
+          </td>
+          <td class="col-mod">
+            <div class="module-badge cell-editable" contenteditable="true" onblur="updateTaskField('${type}', ${index}, 'module', this.innerText)">${item.module || ''}</div>
+          </td>
+          <td class="col-task">
+            <span class="task-name cell-editable" contenteditable="true" onblur="updateTaskField('${type}', ${index}, 'title', this.innerText)">${item.title || ''}</span>
+            <span class="task-sub cell-editable" contenteditable="true" onblur="updateTaskField('${type}', ${index}, 'desc', this.innerText)">${item.desc || ''}</span>
+          </td>
+          <td class="col-own">
+            <div class="owner-badge cell-editable" contenteditable="true" onblur="updateTaskField('${type}', ${index}, 'owner', this.innerText)">${item.owner || ''}</div>
+          </td>
+          <td class="col-eff">
+            <div class="effort-num cell-editable" contenteditable="true" onblur="updateTaskField('${type}', ${index}, 'effort', this.innerText)">${item.effort || ''}</div>
+          </td>
+          <td class="col-st">
+            <div class="status-text cell-editable" contenteditable="true" onblur="updateTaskField('${type}', ${index}, 'status', this.innerText)">${item.status || ''}</div>
+          </td>
+          <td class="col-act no-print">
+            <span class="row-delete-btn" title="Sil / Delete" onclick="deleteRow('${type}', ${index})">&times;</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderAll() {
+      renderTable('fe');
+      renderTable('be');
+    }
+
+    function updateTaskField(type, index, field, value) {
+      const list = type === 'fe' ? feTasks : beTasks;
+      if (list[index]) {
+        list[index][field] = value.trim();
+        localStorage.setItem('it_template_user_customized', 'true');
+        saveState();
+      }
+    }
+
+    function toggleTaskCheck(type, index) {
+      const list = type === 'fe' ? feTasks : beTasks;
+      if (list[index]) {
+        list[index].checked = !list[index].checked;
+        localStorage.setItem('it_template_user_customized', 'true');
+        saveState();
+        renderTable(type);
+      }
+    }
+
+    function cyclePrio(type, index) {
+      const list = type === 'fe' ? feTasks : beTasks;
+      if (list[index]) {
+        const order = ['P0', 'P1', 'P2', 'P3'];
+        let curr = order.indexOf(list[index].prio || 'P2');
+        curr = (curr + 1) % order.length;
+        list[index].prio = order[curr];
+        localStorage.setItem('it_template_user_customized', 'true');
+        saveState();
+        renderTable(type);
+      }
+    }
+
+    function addNewRow(type) {
+      const list = type === 'fe' ? feTasks : beTasks;
+      const nextNum = list.length + 1;
+      const code = (type === 'fe' ? 'FE-' : 'BE-') + (nextNum < 10 ? '0' : '') + nextNum;
+      list.push({
+        id: code,
+        prio: 'P2',
+        checked: false,
+        module: '',
+        title: '',
+        desc: '',
+        owner: '',
+        effort: '',
+        status: I18N[currentLang].status_in_progress
+      });
+      localStorage.setItem('it_template_user_customized', 'true');
+      saveState();
+      renderTable(type);
+    }
+
+    function deleteRow(type, index) {
+      const list = type === 'fe' ? feTasks : beTasks;
+      list.splice(index, 1);
+      localStorage.setItem('it_template_user_customized', 'true');
+      saveState();
+      renderTable(type);
+    }
+
+    function toggleCheck(el) {
+      el.classList.toggle('checked');
+    }
+
+    function switchView(mode, btn) {
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const pageFE = document.getElementById('pageFrontend');
+      const pageBE = document.getElementById('pageBackend');
+      document.body.classList.remove('show-fe-only', 'show-be-only');
+
+      if (mode === 'fe') {
+        pageFE.style.display = 'flex';
+        pageBE.style.display = 'none';
+        document.body.classList.add('show-fe-only');
+      } else if (mode === 'be') {
+        pageFE.style.display = 'none';
+        pageBE.style.display = 'flex';
+        document.body.classList.add('show-be-only');
+      } else {
+        pageFE.style.display = 'flex';
+        pageBE.style.display = 'flex';
+      }
+    }
+
+    function toggleBlankMode() {
+      const dict = I18N[currentLang];
+      const btnText = document.getElementById('uiBtnBlank');
+
+      if (!isBlankMode) {
+        feTasks = Array.from({ length: 11 }, (_, i) => ({
+          id: 'FE-' + (i + 1 < 10 ? '0' : '') + (i + 1),
+          prio: 'P2',
+          checked: false,
+          module: '',
+          title: '',
+          desc: '',
+          owner: '',
+          effort: '',
+          status: ''
+        }));
+
+        beTasks = Array.from({ length: 11 }, (_, i) => ({
+          id: 'BE-' + (i + 1 < 10 ? '0' : '') + (i + 1),
+          prio: 'P2',
+          checked: false,
+          module: '',
+          title: '',
+          desc: '',
+          owner: '',
+          effort: '',
+          status: ''
+        }));
+
+        document.querySelectorAll('.meta-input').forEach(i => i.dataset.origVal = i.value);
+        document.querySelectorAll('.meta-input').forEach(i => i.value = '................................................');
+        document.querySelectorAll('.dotted-row').forEach(d => { d.dataset.origVal = d.innerText; d.innerText = ''; });
+
+        renderAll();
+        btnText.innerText = dict.btn_blank_restore;
+        isBlankMode = true;
+      } else {
+        feTasks = JSON.parse(JSON.stringify(SAMPLE_TASKS[currentLang].fe));
+        beTasks = JSON.parse(JSON.stringify(SAMPLE_TASKS[currentLang].be));
+
+        document.querySelectorAll('.meta-input').forEach(i => {
+          if (i.dataset.origVal) i.value = i.dataset.origVal;
+        });
+        document.querySelectorAll('.dotted-row').forEach(d => {
+          if (d.dataset.origVal) d.innerText = d.dataset.origVal;
+        });
+
+        saveState();
+        renderAll();
+        btnText.innerText = dict.btn_blank;
+        isBlankMode = false;
+      }
+    }
+
+    function exportDataJSON() {
+      const data = {
+        lang: currentLang,
+        meta: {},
+        frontend: feTasks,
+        backend: beTasks,
+        exportedAt: new Date().toISOString()
+      };
+      document.querySelectorAll('.store-state').forEach(el => {
+        data.meta[el.id] = el.tagName === 'INPUT' ? el.value : el.innerText;
+      });
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `it_task_matrix_${currentLang}_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function triggerImportJSON() {
+      document.getElementById('jsonFileInput').click();
+    }
+
+    function importDataJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data.lang && I18N[data.lang]) {
+            currentLang = data.lang;
+            applyLanguage(currentLang);
+          }
+          if (data.frontend && Array.isArray(data.frontend)) feTasks = data.frontend;
+          if (data.backend && Array.isArray(data.backend)) beTasks = data.backend;
+          if (data.meta) {
+            Object.keys(data.meta).forEach(key => {
+              const el = document.getElementById(key);
+              if (el) {
+                if (el.tagName === 'INPUT') el.value = data.meta[key];
+                else el.innerText = data.meta[key];
+              }
+            });
+          }
+          localStorage.setItem('it_template_user_customized', 'true');
+          saveState();
+          renderAll();
+        } catch (err) {
+          alert('Error: Invalid JSON file!');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    function resetAllDefaults() {
+      if (confirm('Reset all changes and restore sample tasks?')) {
+        localStorage.clear();
+        feTasks = JSON.parse(JSON.stringify(SAMPLE_TASKS[currentLang].fe));
+        beTasks = JSON.parse(JSON.stringify(SAMPLE_TASKS[currentLang].be));
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
